@@ -2,6 +2,7 @@ buildscript {
     ext {
         kotlin_version = '1.2.50'
         kodein_version = '5.0.0'
+        android_arch_components_version = '1.1.1'
     }
 
     repositories {
