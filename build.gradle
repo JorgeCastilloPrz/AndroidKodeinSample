@@ -3,6 +3,8 @@ buildscript {
         kotlin_version = '1.2.50'
         kodein_version = '5.0.0'
         android_arch_components_version = '1.1.1'
+        arrow_version = '0.7.2'
+        coroutines_version = '0.22.5'
     }
 
     repositories {

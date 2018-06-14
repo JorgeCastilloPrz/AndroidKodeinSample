@@ -7,13 +7,13 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_photo_list.*
 import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.di.InjectedActivity
-import me.jorgecastillo.viper.common.presenter.BasePresenter
 import me.jorgecastillo.viper.photoslist.di.photoListActivityModule
+import me.jorgecastillo.viper.photoslist.domain.model.Photo
 import me.jorgecastillo.viper.photoslist.presenter.PhotoListPresenter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
-class PhotoListActivity : InjectedActivity(), BasePresenter.View {
+class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
 
   private val presenter by instance<PhotoListPresenter>()
 
@@ -39,9 +39,8 @@ class PhotoListActivity : InjectedActivity(), BasePresenter.View {
   }
 
   private fun setFabListener() {
-    fab.setOnClickListener { view ->
-      Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-          .setAction("Action", null).show()
+    fab.setOnClickListener {
+      presenter.onAddButtonClicked()
     }
   }
 
@@ -61,5 +60,13 @@ class PhotoListActivity : InjectedActivity(), BasePresenter.View {
 
   override fun hideLoading() {
 
+  }
+
+  override fun renderPhotos(photos: List<Photo>) {
+
+  }
+
+  override fun displayLoadingPhotosError() {
+    Snackbar.make(toolbar, R.string.loading_photos_error, Snackbar.LENGTH_SHORT).show()
   }
 }

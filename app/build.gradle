@@ -22,6 +22,12 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
@@ -33,6 +39,11 @@ dependencies {
     implementation("android.arch.lifecycle:extensions:$android_arch_components_version") {
         exclude group: 'android.arch.lifecycle', module: 'common'
     }
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+    implementation "io.arrow-kt:arrow-data:$arrow_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // test
     testImplementation 'junit:junit:4.12'

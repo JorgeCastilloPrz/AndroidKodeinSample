@@ -7,6 +7,7 @@ class PhotoListPresenter() : BasePresenter<PhotoListPresenter.View>() {
 
   interface View : BasePresenter.View {
     fun renderPhotos(photos: List<Photo>)
+    fun displayLoadingPhotosError()
   }
 
   init {
@@ -26,5 +27,9 @@ class PhotoListPresenter() : BasePresenter<PhotoListPresenter.View>() {
         }
       }
     })*/
+  }
+
+  fun onAddButtonClicked() {
+
   }
 }
