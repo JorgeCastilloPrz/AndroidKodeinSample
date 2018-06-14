@@ -2,4 +2,7 @@
     <string name="app_name">AndroidViperSample</string>
     <string name="action_settings">Settings</string>
     <string name="loading_photos_error">Something went wrong when loading images.</string>
+    <string name="author">Pic by:</string>
+    <string name="on">on</string>
+    <string name="unsplash"><u>Unsplash</u></string>
 </resources>

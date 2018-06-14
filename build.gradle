@@ -9,6 +9,7 @@ buildscript {
         moshi_version = '1.5.0'
         gson_version = '2.8.2'
         okhttp_version = '3.10.0'
+        picasso_version = '2.71828'
     }
 
     repositories {

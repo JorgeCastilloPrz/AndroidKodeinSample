@@ -1,11 +1,8 @@
 package me.jorgecastillo.viper.photoslist.domain.interactor
 
-import me.jorgecastillo.viper.common.domain.error.Error
 import me.jorgecastillo.viper.common.domain.interactor.Interactor
 import me.jorgecastillo.viper.photoslist.domain.model.Photo
 import me.jorgecastillo.viper.photoslist.domain.repository.PhotosRepository
-
-class PhotosNotFound : Error.FeatureError()
 
 class GetPhotos(private val photosRepository: PhotosRepository) :
     Interactor<GetPhotos.Params, List<Photo>>() {

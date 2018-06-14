@@ -13,9 +13,9 @@ open class BasePresenter<T : BasePresenter.View> {
     fun hideLoading()
   }
 
-  var view: View? = null
+  var view: T? = null
 
-  fun resume(view: View) {
+  fun resume(view: T) {
     this.view = view
   }
 

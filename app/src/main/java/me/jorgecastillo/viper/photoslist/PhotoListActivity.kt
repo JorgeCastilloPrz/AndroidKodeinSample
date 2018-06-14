@@ -2,6 +2,7 @@ package me.jorgecastillo.viper.photoslist
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_photo_list.*
@@ -26,6 +27,7 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
     setContentView(R.layout.activity_photo_list)
     setSupportActionBar(toolbar)
     setFabListener()
+    setupPhotosList()
   }
 
   override fun onResume() {
@@ -42,6 +44,12 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
     fab.setOnClickListener {
       presenter.onAddButtonClicked()
     }
+  }
+
+  private fun setupPhotosList() {
+    val layoutManager = LinearLayoutManager(this)
+    photoList.layoutManager = layoutManager
+    photoList.adapter = PhotosAdapter()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

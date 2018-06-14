@@ -33,6 +33,14 @@ data class UserDto(
     val profile_image: ProfileImageDto,
     val links: ProfileLinksDto)
 
+val PhotoDto.author: String
+  get() =
+    if (this.user.instagram_username != null)
+      "@${this.user.instagram_username}"
+    else
+      this.user.username
+
+
 data class UrlsDto(
         val raw: String,
         val full: String,
