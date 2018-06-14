@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_photo_list.*
 import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.di.InjectedActivity
@@ -27,7 +28,6 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_photo_list)
     setSupportActionBar(toolbar)
-    setFabListener()
     setupPhotosList()
   }
 
@@ -51,12 +51,6 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
     else -> super.onOptionsItemSelected(item)
   }
 
-  private fun setFabListener() {
-    fab.setOnClickListener {
-      presenter.onAddButtonClicked()
-    }
-  }
-
   private fun setupPhotosList() {
     photoList.setHasFixedSize(true)
     val layoutManager = LinearLayoutManager(this)
@@ -70,11 +64,11 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
   }
 
   override fun showLoading() {
-
+    loading.visibility = View.VISIBLE
   }
 
   override fun hideLoading() {
-
+    loading.visibility = View.GONE
   }
 
   override fun renderPhotos(photos: List<Photo>) {
