@@ -1,10 +1,11 @@
-package me.jorgecastillo.viper
+package me.jorgecastillo.viper.photoslist
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_photo_list.*
+import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.di.InjectedActivity
 
 class PhotoListActivity : InjectedActivity() {
