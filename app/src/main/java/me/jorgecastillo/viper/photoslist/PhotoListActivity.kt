@@ -17,6 +17,7 @@ import org.kodein.di.generic.instance
 class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
 
   private val presenter by instance<PhotoListPresenter>()
+  private val adapter = PhotosAdapter()
 
   override fun activityModule() = Kodein.Module {
     import(photoListActivityModule())
@@ -40,18 +41,6 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
     presenter.pause()
   }
 
-  private fun setFabListener() {
-    fab.setOnClickListener {
-      presenter.onAddButtonClicked()
-    }
-  }
-
-  private fun setupPhotosList() {
-    val layoutManager = LinearLayoutManager(this)
-    photoList.layoutManager = layoutManager
-    photoList.adapter = PhotosAdapter()
-  }
-
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu_photo_list, menu)
     return true
@@ -60,6 +49,24 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
   override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
     R.id.action_settings -> true
     else -> super.onOptionsItemSelected(item)
+  }
+
+  private fun setFabListener() {
+    fab.setOnClickListener {
+      presenter.onAddButtonClicked()
+    }
+  }
+
+  private fun setupPhotosList() {
+    photoList.setHasFixedSize(true)
+    val layoutManager = LinearLayoutManager(this)
+    photoList.layoutManager = layoutManager
+    photoList.adapter = adapter
+    adapter.onItemClick = ::onItemClick
+  }
+
+  private fun onItemClick(id: String): Unit {
+    presenter.onPhotoClick(id)
   }
 
   override fun showLoading() {
@@ -71,7 +78,7 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
   }
 
   override fun renderPhotos(photos: List<Photo>) {
-
+    adapter.addPics(photos)
   }
 
   override fun displayLoadingPhotosError() {

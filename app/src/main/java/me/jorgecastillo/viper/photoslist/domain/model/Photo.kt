@@ -1,3 +1,9 @@
 package me.jorgecastillo.viper.photoslist.domain.model
 
-data class Photo(val url: String)
+import java.util.*
+
+data class Photo(val id: String,
+                 val url: String,
+                 val author: String,
+                 val description: String?,
+                 val created_at: String)

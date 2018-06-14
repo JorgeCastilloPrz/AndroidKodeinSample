@@ -7,19 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_photo.view.*
 import me.jorgecastillo.viper.R
-import me.jorgecastillo.viper.common.data.network.model.PhotoDto
-import me.jorgecastillo.viper.common.data.network.model.author
 import me.jorgecastillo.viper.common.extensions.load
+import me.jorgecastillo.viper.photoslist.domain.model.Photo
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PhotosAdapter(var photos: MutableList<PhotoDto> = ArrayList()) :
-    RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
+class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
-  var lastQueryString: String? = null
+  private val photos: MutableList<Photo> = arrayListOf()
   var onItemClick: ((String) -> Unit)? = null
 
-  fun addPics(photos: List<PhotoDto>): Unit {
+  fun addPics(photos: List<Photo>): Unit {
+    this.photos.clear()
     this.photos.addAll(photos)
     notifyDataSetChanged()
   }
@@ -39,10 +38,10 @@ class PhotosAdapter(var photos: MutableList<PhotoDto> = ArrayList()) :
   class ViewHolder(view: View, private val onItemClick: ((String) -> Unit)?) : RecyclerView.ViewHolder(view) {
 
     @SuppressLint("SetTextI18n")
-    fun bind(photo: PhotoDto) {
+    fun bind(photo: Photo) {
       with(photo) {
         itemView.cell.setOnClickListener { onItemClick?.invoke(photo.id) }
-        itemView.picture.load(photo.urls.regular)
+        itemView.picture.load(photo.url)
         itemView.title.text = photo.author
         itemView.unsplashLink.text = itemView.resources.getString(R.string.unsplash)
 

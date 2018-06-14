@@ -34,4 +34,8 @@ class PhotoListPresenter(private val getPhotos: GetPhotos) :
   fun onAddButtonClicked() {
 
   }
+
+  fun onPhotoClick(id: String) {
+    
+  }
 }
