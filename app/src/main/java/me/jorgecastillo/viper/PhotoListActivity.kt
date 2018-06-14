@@ -2,13 +2,12 @@ package me.jorgecastillo.viper
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-
 import kotlinx.android.synthetic.main.activity_photo_list.*
+import me.jorgecastillo.viper.common.di.InjectedActivity
 
-class PhotoListActivity : AppCompatActivity() {
+class PhotoListActivity : InjectedActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -22,7 +21,6 @@ class PhotoListActivity : AppCompatActivity() {
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    // Inflate the menu; this adds items to the action bar if it is present.
     menuInflater.inflate(R.menu.menu_photo_list, menu)
     return true
   }
