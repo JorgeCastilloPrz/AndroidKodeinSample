@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".PhotosApp"
+        android:name="me.jorgecastillo.kodein.PhotosApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".photoslist.view.PhotoListActivity"
+            android:name="me.jorgecastillo.kodein.photoslist.view.PhotoListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".detail.view.DetailActivity"
+            android:name="me.jorgecastillo.kodein.detail.view.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
-            android:name=".common.GenericFileProvider"
+            android:name="me.jorgecastillo.kodein.common.GenericFileProvider"
             android:authorities="${applicationId}.me.jorgecastillo.snapgram.provider"
             android:exported="false"
             android:grantUriPermissions="true">

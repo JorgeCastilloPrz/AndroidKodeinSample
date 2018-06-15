@@ -3,11 +3,11 @@ package me.jorgecastillo.kodein.photoslist.presenter
 import arrow.core.Either
 import me.jorgecastillo.kodein.common.domain.error.Error
 import me.jorgecastillo.kodein.common.presenter.BasePresenter
-import me.jorgecastillo.kodein.common.router.Router
+import me.jorgecastillo.kodein.common.router.Navigator
 import me.jorgecastillo.kodein.photoslist.domain.interactor.GetPhotos
 import me.jorgecastillo.kodein.common.domain.model.Photo
 
-class PhotoListPresenter(private val getPhotos: GetPhotos, private val router: Router) :
+class PhotoListPresenter(private val getPhotos: GetPhotos, private val navigator: Navigator) :
     BasePresenter<PhotoListPresenter.View>() {
 
   interface View : BasePresenter.View {
@@ -34,6 +34,6 @@ class PhotoListPresenter(private val getPhotos: GetPhotos, private val router: R
   }
 
   fun onPhotoClick(photoId: String) {
-    router.goToDetail(photoId)
+    navigator.goToDetail(photoId)
   }
 }
