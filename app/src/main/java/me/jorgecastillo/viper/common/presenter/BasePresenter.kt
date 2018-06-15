@@ -15,11 +15,11 @@ open class BasePresenter<T : BasePresenter.View> {
 
   var view: T? = null
 
-  fun resume(view: T) {
+  open fun resume(view: T) {
     this.view = view
   }
 
-  fun pause() {
+  open fun pause() {
     this.view = null
   }
 }

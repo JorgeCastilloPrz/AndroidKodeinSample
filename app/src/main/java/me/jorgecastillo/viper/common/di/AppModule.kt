@@ -1,8 +1,8 @@
 package me.jorgecastillo.viper.common.di
 
 import android.content.Context
-import me.jorgecastillo.viper.common.AndroidLogger
-import me.jorgecastillo.viper.common.Logger
+import me.jorgecastillo.viper.common.log.AndroidLogger
+import me.jorgecastillo.viper.common.log.Logger
 import me.jorgecastillo.viper.common.data.network.PhotosNetworkDataSource
 import me.jorgecastillo.viper.common.data.network.UnsplashPhotosDataSource
 import me.jorgecastillo.viper.common.data.network.httpClient

@@ -7,4 +7,6 @@ import me.jorgecastillo.viper.photoslist.domain.model.Photo
 interface PhotosNetworkDataSource {
 
   fun getAll(): Either<Error, List<Photo>>
+
+  fun getPhoto(photoId: String): Either<Error, Photo>
 }

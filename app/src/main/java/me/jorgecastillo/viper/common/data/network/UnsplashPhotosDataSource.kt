@@ -25,10 +25,15 @@ class UnsplashPhotosDataSource(private val service: UnsplashService) : PhotosNet
         } else PhotosNotFound().left()
       })
 
-  fun getPhoto(id: String): Either<Error, Photo> {
-    val response = service.getPhoto(id).execute()
-    return if (response.isSuccessful) {
-      response.body()!!.toDomain().right()
-    } else PhotosNotFound().left()
-  }
+  override fun getPhoto(photoId: String): Either<Error, Photo> =
+      Try {
+        service.getPhoto(photoId).execute()
+      }.fold(ifFailure = {
+        Error.ServerError().left()
+      }, ifSuccess = { response ->
+        if (response.isSuccessful) {
+          val body = response.body()!!
+          body.toDomain().right()
+        } else PhotosNotFound().left()
+      })
 }

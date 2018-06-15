@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.common
+package me.jorgecastillo.viper.common.log
 
 /**
  * Logger contract. It can be implemented in different ways for different

@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.common
+package me.jorgecastillo.viper.common.log
 
 import android.content.Context
 import android.util.Log

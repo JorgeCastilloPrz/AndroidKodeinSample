@@ -14,7 +14,8 @@ class PhotoListPresenter(private val getPhotos: GetPhotos) :
     fun displayLoadingPhotosError()
   }
 
-  init {
+  override fun resume(view: View) {
+    super.resume(view)
     loadPhotos()
   }
 
@@ -36,6 +37,6 @@ class PhotoListPresenter(private val getPhotos: GetPhotos) :
   }
 
   fun onPhotoClick(id: String) {
-    
+
   }
 }
