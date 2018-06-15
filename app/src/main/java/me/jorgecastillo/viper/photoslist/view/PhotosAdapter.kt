@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.item_photo.view.*
 import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.domain.model.Photo
+import me.jorgecastillo.viper.common.view.load
 import java.text.SimpleDateFormat
 import java.util.*
 

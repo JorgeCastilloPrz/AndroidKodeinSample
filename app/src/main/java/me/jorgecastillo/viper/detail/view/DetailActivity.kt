@@ -10,11 +10,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detail.*
 import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.di.InjectedActivity
 import me.jorgecastillo.viper.detail.di.detailActivityModule
 import me.jorgecastillo.viper.detail.presenter.DetailPresenter
 import me.jorgecastillo.viper.common.domain.model.Photo
+import me.jorgecastillo.viper.common.view.getBitmapUri
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat

@@ -1,13 +1,15 @@
 package me.jorgecastillo.viper.common.di
 
 import android.content.Context
-import me.jorgecastillo.viper.common.domain.repository.PhotosNetworkDataSource
+import me.jorgecastillo.viper.common.data.local.InMemoryPhotosDataSource
 import me.jorgecastillo.viper.common.data.network.UnsplashPhotosDataSource
-import me.jorgecastillo.viper.common.data.network.http.httpClient
-import me.jorgecastillo.viper.common.data.network.http.HeadersInterceptor
 import me.jorgecastillo.viper.common.data.network.UnsplashService
+import me.jorgecastillo.viper.common.data.network.http.HeadersInterceptor
+import me.jorgecastillo.viper.common.data.network.http.httpClient
 import me.jorgecastillo.viper.common.data.network.http.loggingInterceptor
 import me.jorgecastillo.viper.common.data.network.photosService
+import me.jorgecastillo.viper.common.domain.repository.PhotosLocalDataSource
+import me.jorgecastillo.viper.common.domain.repository.PhotosNetworkDataSource
 import me.jorgecastillo.viper.common.log.AndroidLogger
 import me.jorgecastillo.viper.common.log.Logger
 import me.jorgecastillo.viper.common.router.PhotoAppRouter
@@ -34,6 +36,7 @@ fun appModule(appContext: Context) = Kodein.Module {
     httpClient(instance(tag = "headers"), instance(tag = "logging"))
   }
   bind<UnsplashService>() with singleton { photosService(instance()) }
+  bind<PhotosLocalDataSource>() with singleton { InMemoryPhotosDataSource() }
   bind<PhotosNetworkDataSource>() with singleton { UnsplashPhotosDataSource(instance()) }
-  bind<PhotosRepository>() with singleton { PhotosRepository(instance()) }
+  bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }
 }
