@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "me.jorgecastillo.viper"
+        applicationId "me.jorgecastillo.kodein.sample"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
