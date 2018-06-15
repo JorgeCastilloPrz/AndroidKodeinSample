@@ -5,7 +5,7 @@ import me.jorgecastillo.viper.common.domain.error.Error
 import me.jorgecastillo.viper.common.presenter.BasePresenter
 import me.jorgecastillo.viper.common.router.Router
 import me.jorgecastillo.viper.photoslist.domain.interactor.GetPhotos
-import me.jorgecastillo.viper.photoslist.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.model.Photo
 
 class PhotoListPresenter(private val getPhotos: GetPhotos, private val router: Router) :
     BasePresenter<PhotoListPresenter.View>() {

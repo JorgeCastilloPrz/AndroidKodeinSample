@@ -5,9 +5,9 @@ import arrow.core.Try
 import arrow.core.left
 import arrow.core.right
 import me.jorgecastillo.viper.common.data.network.mapper.toDomain
-import me.jorgecastillo.viper.common.data.network.service.UnsplashService
 import me.jorgecastillo.viper.common.domain.error.Error
-import me.jorgecastillo.viper.photoslist.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.repository.PhotosNetworkDataSource
 
 class PhotosNotFound : Error.FeatureError()
 

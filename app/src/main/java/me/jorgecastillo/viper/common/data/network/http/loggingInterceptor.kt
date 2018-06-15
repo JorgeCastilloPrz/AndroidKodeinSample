@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.common.data.network.service
+package me.jorgecastillo.viper.common.data.network.http
 
 import okhttp3.logging.HttpLoggingInterceptor
 

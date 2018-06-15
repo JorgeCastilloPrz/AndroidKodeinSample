@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.common.data.network.service
+package me.jorgecastillo.viper.common.data.network
 
 import me.jorgecastillo.viper.common.data.network.model.GetPhotosResponse
 import me.jorgecastillo.viper.common.data.network.model.PhotoDto

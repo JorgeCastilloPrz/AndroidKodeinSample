@@ -4,7 +4,7 @@ import arrow.core.Either
 import me.jorgecastillo.viper.common.domain.error.Error
 import me.jorgecastillo.viper.common.presenter.BasePresenter
 import me.jorgecastillo.viper.detail.domain.interactor.GetPhoto
-import me.jorgecastillo.viper.photoslist.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.model.Photo
 
 class DetailPresenter(private val photoId: String, private val getPhoto: GetPhoto) :
     BasePresenter<DetailPresenter.View>() {

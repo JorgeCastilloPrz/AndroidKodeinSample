@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.detail
+package me.jorgecastillo.viper.detail.view
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -10,13 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_detail.*
 import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.di.InjectedActivity
-import me.jorgecastillo.viper.common.extensions.getBitmapUri
 import me.jorgecastillo.viper.detail.di.detailActivityModule
 import me.jorgecastillo.viper.detail.presenter.DetailPresenter
-import me.jorgecastillo.viper.photoslist.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.model.Photo
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat

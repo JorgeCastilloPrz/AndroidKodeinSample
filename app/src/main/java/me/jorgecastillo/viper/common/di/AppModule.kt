@@ -1,13 +1,13 @@
 package me.jorgecastillo.viper.common.di
 
 import android.content.Context
-import me.jorgecastillo.viper.common.data.network.PhotosNetworkDataSource
+import me.jorgecastillo.viper.common.domain.repository.PhotosNetworkDataSource
 import me.jorgecastillo.viper.common.data.network.UnsplashPhotosDataSource
-import me.jorgecastillo.viper.common.data.network.httpClient
-import me.jorgecastillo.viper.common.data.network.service.HeadersInterceptor
-import me.jorgecastillo.viper.common.data.network.service.UnsplashService
-import me.jorgecastillo.viper.common.data.network.service.loggingInterceptor
-import me.jorgecastillo.viper.common.data.network.service.photosService
+import me.jorgecastillo.viper.common.data.network.http.httpClient
+import me.jorgecastillo.viper.common.data.network.http.HeadersInterceptor
+import me.jorgecastillo.viper.common.data.network.UnsplashService
+import me.jorgecastillo.viper.common.data.network.http.loggingInterceptor
+import me.jorgecastillo.viper.common.data.network.photosService
 import me.jorgecastillo.viper.common.log.AndroidLogger
 import me.jorgecastillo.viper.common.log.Logger
 import me.jorgecastillo.viper.common.router.PhotoAppRouter

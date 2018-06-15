@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.photoslist.domain.model
+package me.jorgecastillo.viper.common.domain.model
 
 import java.util.*
 

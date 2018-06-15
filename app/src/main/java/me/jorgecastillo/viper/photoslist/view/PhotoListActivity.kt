@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.photoslist
+package me.jorgecastillo.viper.photoslist.view
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_photo_list.*
 import me.jorgecastillo.viper.R
 import me.jorgecastillo.viper.common.di.InjectedActivity
 import me.jorgecastillo.viper.photoslist.di.photoListActivityModule
-import me.jorgecastillo.viper.photoslist.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.model.Photo
 import me.jorgecastillo.viper.photoslist.presenter.PhotoListPresenter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance

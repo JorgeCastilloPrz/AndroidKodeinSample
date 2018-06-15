@@ -1,9 +1,9 @@
 package me.jorgecastillo.viper.detail.domain.interactor
 
-import me.jorgecastillo.viper.common.data.network.PhotosNetworkDataSource
+import me.jorgecastillo.viper.common.domain.repository.PhotosNetworkDataSource
 import me.jorgecastillo.viper.common.domain.error.Error
 import me.jorgecastillo.viper.common.domain.interactor.Interactor
-import me.jorgecastillo.viper.photoslist.domain.model.Photo
+import me.jorgecastillo.viper.common.domain.model.Photo
 
 class PhotoNotFound : Error.FeatureError()
 

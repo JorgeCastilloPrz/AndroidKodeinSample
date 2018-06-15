@@ -1,7 +1,7 @@
 package me.jorgecastillo.viper.common.router
 
 import android.app.Activity
-import me.jorgecastillo.viper.detail.DetailActivity
+import me.jorgecastillo.viper.detail.view.DetailActivity
 
 /**
  * Android Router implementation. We're implementing an interface so we can easily switch the router

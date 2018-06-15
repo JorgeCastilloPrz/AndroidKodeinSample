@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.common.data.network
+package me.jorgecastillo.viper.common.data.network.http
 
 import me.jorgecastillo.viper.BuildConfig
 import okhttp3.Interceptor

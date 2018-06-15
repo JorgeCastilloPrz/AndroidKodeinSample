@@ -1,4 +1,4 @@
-package me.jorgecastillo.viper.common.extensions
+package me.jorgecastillo.viper.common.view
 
 import android.support.annotation.DrawableRes
 import android.widget.ImageView
