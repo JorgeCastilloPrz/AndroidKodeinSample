@@ -33,9 +33,6 @@ class PhotoListPresenter(private val getPhotos: GetPhotos, private val router: R
     })
   }
 
-  fun onAddButtonClicked() {
-  }
-
   fun onPhotoClick(photoId: String) {
     router.goToDetail(photoId)
   }
