@@ -3,10 +3,11 @@ package me.jorgecastillo.viper.photoslist.presenter
 import arrow.core.Either
 import me.jorgecastillo.viper.common.domain.error.Error
 import me.jorgecastillo.viper.common.presenter.BasePresenter
+import me.jorgecastillo.viper.common.router.Router
 import me.jorgecastillo.viper.photoslist.domain.interactor.GetPhotos
 import me.jorgecastillo.viper.photoslist.domain.model.Photo
 
-class PhotoListPresenter(private val getPhotos: GetPhotos) :
+class PhotoListPresenter(private val getPhotos: GetPhotos, private val router: Router) :
     BasePresenter<PhotoListPresenter.View>() {
 
   interface View : BasePresenter.View {
@@ -33,10 +34,9 @@ class PhotoListPresenter(private val getPhotos: GetPhotos) :
   }
 
   fun onAddButtonClicked() {
-
   }
 
-  fun onPhotoClick(id: String) {
-
+  fun onPhotoClick(photoId: String) {
+    router.goToDetail(photoId)
   }
 }

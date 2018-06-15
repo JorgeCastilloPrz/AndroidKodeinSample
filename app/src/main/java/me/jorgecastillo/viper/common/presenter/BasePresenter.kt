@@ -9,8 +9,8 @@ open class BasePresenter<T : BasePresenter.View> {
    * Base view contract. All views on this app will have a loading progressbar.
    */
   interface View {
-    fun showLoading()
-    fun hideLoading()
+    fun showLoading(): Unit
+    fun hideLoading(): Unit
   }
 
   var view: T? = null

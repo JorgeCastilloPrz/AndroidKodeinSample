@@ -1,6 +1,6 @@
 package me.jorgecastillo.viper.common.router
 
-import android.support.v7.app.AppCompatActivity
+import android.app.Activity
 import me.jorgecastillo.viper.detail.DetailActivity
 
 /**
@@ -12,7 +12,7 @@ import me.jorgecastillo.viper.detail.DetailActivity
  * have access to the newly created Activity from the previous one. But the main intention in the
  * end is to route from one given activity to another. And that's what we got here.
  */
-class PhotoAppRouter(private val activity: AppCompatActivity) : Router {
+class PhotoAppRouter(private val activity: Activity) : Router {
   override fun goToDetail(photoId: String) {
     activity.startActivity(DetailActivity.getIntent(activity, photoId))
   }
