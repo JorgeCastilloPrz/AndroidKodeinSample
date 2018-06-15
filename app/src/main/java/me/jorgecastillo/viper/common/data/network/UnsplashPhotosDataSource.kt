@@ -8,6 +8,7 @@ import me.jorgecastillo.viper.common.data.network.mapper.toDomain
 import me.jorgecastillo.viper.common.domain.error.Error
 import me.jorgecastillo.viper.common.domain.model.Photo
 import me.jorgecastillo.viper.common.domain.repository.PhotosNetworkDataSource
+import me.jorgecastillo.viper.detail.domain.interactor.PhotoNotFound
 
 class PhotosNotFound : Error.FeatureError()
 
@@ -34,6 +35,6 @@ class UnsplashPhotosDataSource(private val service: UnsplashService) : PhotosNet
         if (response.isSuccessful) {
           val body = response.body()!!
           body.toDomain().right()
-        } else PhotosNotFound().left()
+        } else PhotoNotFound().left()
       })
 }
