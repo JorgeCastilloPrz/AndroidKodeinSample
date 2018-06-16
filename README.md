@@ -8,5 +8,5 @@ The repo is a sample project for the [caster.io Kodein course](https://caster.io
 
 ## Screenshots
 
-<img src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/list.png?raw=true" data-canonical-src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/list.png?raw=true" width="256" height="306" />
-<img src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/detail.png?raw=true" data-canonical-src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/detail.png?raw=true" width="256" height="306" />
+<img src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/list.png?raw=true" data-canonical-src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/list.png?raw=true" width="256" height="455" />
+<img src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/detail.png?raw=true" data-canonical-src="https://github.com/JorgeCastilloPrz/AndroidKodeinSample/blob/master/assets/detail.png?raw=true" width="256" height="455" />
