@@ -8,6 +8,8 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import arrow.core.left
 import arrow.core.right
 import com.nhaarman.mockito_kotlin.whenever
+import kotlinx.coroutines.experimental.CoroutineDispatcher
+import kotlinx.coroutines.experimental.android.UI
 import me.jorgecastillo.kodein.common.data.network.PhotosNotFound
 import me.jorgecastillo.kodein.common.domain.interactor.Invoker
 import me.jorgecastillo.kodein.common.domain.model.Photo
@@ -18,6 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import org.mockito.Mock
@@ -37,7 +40,8 @@ class PhotoListActivityShould {
   @Rule
   @JvmField
   val overridesRule: OverridesRule = OverridesRule {
-    bind<Invoker>(overrides = true) with singleton { BlockingUseCaseInvoker() }
+    bind<CoroutineDispatcher>() with provider { UI }
+    bind<Invoker>(overrides = true) with singleton { BlockingUseCaseInvoker(instance()) }
     bind<GetPhotos>(overrides = true) with provider { getPhotos }
   }
 

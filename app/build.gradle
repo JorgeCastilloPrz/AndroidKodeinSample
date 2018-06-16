@@ -19,6 +19,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        String sharedTestDir = 'src/sharedTest/java'
+        test {
+            java.srcDir sharedTestDir
+        }
+        androidTest {
+            java.srcDir sharedTestDir
+        }
+    }
 }
 
 kotlin {
@@ -71,4 +81,7 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation "org.mockito:mockito-android:$mockito_version"
     androidTestImplementation 'com.github.tmurakami:dexopener:1.0.2'
+
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
 }
