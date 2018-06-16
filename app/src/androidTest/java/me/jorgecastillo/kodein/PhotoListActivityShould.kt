@@ -9,6 +9,7 @@ import arrow.core.left
 import arrow.core.right
 import com.nhaarman.mockito_kotlin.whenever
 import me.jorgecastillo.kodein.common.data.network.PhotosNotFound
+import me.jorgecastillo.kodein.common.domain.interactor.Invoker
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.photoslist.domain.interactor.GetPhotos
 import me.jorgecastillo.kodein.photoslist.view.PhotoListActivity
@@ -18,6 +19,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
+import org.kodein.di.generic.singleton
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -35,6 +37,7 @@ class PhotoListActivityShould {
   @Rule
   @JvmField
   val overridesRule: OverridesRule = OverridesRule {
+    bind<Invoker>(overrides = true) with singleton { BlockingUseCaseInvoker() }
     bind<GetPhotos>(overrides = true) with provider { getPhotos }
   }
 
