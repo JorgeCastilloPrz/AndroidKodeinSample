@@ -23,6 +23,13 @@ import org.kodein.di.generic.singleton
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+/**
+ * UI tests for the list activity mocking out the domain layer (Use Cases) and any further pieces
+ * beyond it.
+ *
+ * To mock use cases we use Kodein overrides on the application scope, so we override production
+ * bindings with bindings providing mocks.
+ */
 @RunWith(MockitoJUnitRunner::class)
 class PhotoListActivityShould {
 
