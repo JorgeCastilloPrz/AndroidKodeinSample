@@ -16,7 +16,7 @@ import me.jorgecastillo.kodein.detail.di.detailActivityModule
 import me.jorgecastillo.kodein.detail.presenter.DetailPresenter
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.view.getBitmapUri
-import me.jorgecastillo.kodein.sample.R
+import me.jorgecastillo.kodein.R
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat

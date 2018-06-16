@@ -11,7 +11,7 @@ import me.jorgecastillo.kodein.common.di.InjectedActivity
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.photoslist.di.photoListActivityModule
 import me.jorgecastillo.kodein.photoslist.presenter.PhotoListPresenter
-import me.jorgecastillo.kodein.sample.R
+import me.jorgecastillo.kodein.R
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 

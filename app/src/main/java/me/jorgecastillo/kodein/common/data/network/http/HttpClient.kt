@@ -1,6 +1,6 @@
 package me.jorgecastillo.kodein.common.data.network.http
 
-import me.jorgecastillo.kodein.sample.BuildConfig
+import me.jorgecastillo.kodein.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 

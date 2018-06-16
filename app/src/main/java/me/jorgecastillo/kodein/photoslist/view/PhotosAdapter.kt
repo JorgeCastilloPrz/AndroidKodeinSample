@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_photo.view.*
+import me.jorgecastillo.kodein.R
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.view.load
-import me.jorgecastillo.kodein.sample.R
 import java.text.SimpleDateFormat
 import java.util.*
 
