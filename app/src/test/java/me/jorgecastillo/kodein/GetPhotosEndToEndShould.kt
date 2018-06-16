@@ -1,12 +1,10 @@
 package me.jorgecastillo.kodein
 
+import arrow.core.left
 import arrow.core.right
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import kotlinx.coroutines.experimental.CoroutineDispatcher
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.android.HandlerContext
-import kotlinx.coroutines.experimental.android.UI
+import me.jorgecastillo.kodein.common.data.network.PhotosNotFound
 import me.jorgecastillo.kodein.common.domain.interactor.Invoker
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.domain.repository.PhotosLocalDataSource
@@ -26,6 +24,11 @@ import org.kodein.di.generic.singleton
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+/**
+ * End to end test mocking out view implementation, threading and data source implementations. We
+ * are testing all the resting layers on integration by providing injection of all the parts in
+ * between both edges by using Kodein.
+ */
 @RunWith(MockitoJUnitRunner::class)
 class GetPhotosEndToEndShould : KodeinAware {
 
@@ -34,7 +37,7 @@ class GetPhotosEndToEndShould : KodeinAware {
   @Mock
   lateinit var localDataSource: PhotosLocalDataSource
   @Mock
-  lateinit var photosNetworkDataSource: PhotosNetworkDataSource
+  lateinit var networkDataSource: PhotosNetworkDataSource
   @Mock
   lateinit var navigator: Navigator
   @Mock
@@ -42,17 +45,16 @@ class GetPhotosEndToEndShould : KodeinAware {
 
   override val kodein = Kodein.lazy {
     bind<Navigator>() with singleton { navigator }
-    bind<CoroutineDispatcher>() with provider { DefaultDispatcher }
-    bind<Invoker>() with singleton { BlockingUseCaseInvoker(instance()) }
+    bind<Invoker>() with singleton { BlockingUseCaseInvoker() }
     bind<PhotosLocalDataSource>() with singleton { localDataSource }
-    bind<PhotosNetworkDataSource>() with singleton { photosNetworkDataSource }
+    bind<PhotosNetworkDataSource>() with singleton { networkDataSource }
     bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }
     bind<GetPhotos>() with provider { GetPhotos(instance()) }
     bind<PhotoListPresenter>() with provider { PhotoListPresenter(instance(), instance(), instance()) }
   }
 
   @Test
-  fun showPhotosOnSuccessfulLoading() {
+  fun showPhotosOnSuccessfulLoadingFromCache() {
     givenLocalDataSourcePhotos(anyPhotos)
 
     presenter.resume(view)
@@ -60,8 +62,40 @@ class GetPhotosEndToEndShould : KodeinAware {
     verify(view).renderPhotos(anyPhotos)
   }
 
+  @Test
+  fun showPhotosWhenNotAvailableOnCacheButOnNetwork() {
+    givenNoPhotosCached()
+    givenNetworkDataSourcePhotos(anyPhotos)
+
+    presenter.resume(view)
+
+    verify(view).renderPhotos(anyPhotos)
+  }
+
+  @Test
+  fun givesFeedbackWhenLoadingPhotosError() {
+    givenNoPhotosAvailableOnAnySources()
+
+    presenter.resume(view)
+
+    verify(view).displayLoadingPhotosError()
+  }
+
   private fun givenLocalDataSourcePhotos(anyPhotos: List<Photo>) {
     whenever(localDataSource.getAll()).thenReturn(anyPhotos.right())
+  }
+
+  private fun givenNetworkDataSourcePhotos(anyPhotos: List<Photo>) {
+    whenever(networkDataSource.getAll()).thenReturn(anyPhotos.right())
+  }
+
+  private fun givenNoPhotosCached() {
+    whenever(localDataSource.getAll()).thenReturn(PhotosNotFound().left())
+  }
+
+  private fun givenNoPhotosAvailableOnAnySources() {
+    whenever(localDataSource.getAll()).thenReturn(PhotosNotFound().left())
+    whenever(networkDataSource.getAll()).thenReturn(PhotosNotFound().left())
   }
 
   companion object {
