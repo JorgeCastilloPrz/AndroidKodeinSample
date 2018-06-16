@@ -1,6 +1,8 @@
 package me.jorgecastillo.kodein.common.di
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
+import me.jorgecastillo.kodein.PhotosApp
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -15,6 +17,7 @@ abstract class InjectedActivity : AppCompatActivity(), KodeinAware {
     extend(appKodein)
     import(baseActivityModule(this@InjectedActivity))
     import(activityModule())
+    (app().overrideBindings)()
   }
 
   /**
@@ -23,3 +26,5 @@ abstract class InjectedActivity : AppCompatActivity(), KodeinAware {
   open fun activityModule() = Kodein.Module {
   }
 }
+
+fun Activity.app() = applicationContext as PhotosApp

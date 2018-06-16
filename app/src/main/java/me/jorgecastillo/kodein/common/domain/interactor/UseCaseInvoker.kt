@@ -7,12 +7,14 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import me.jorgecastillo.kodein.common.domain.error.Error
 
-abstract class Interactor<in Params, out Type> where Type : Any {
+class UseCaseInvoker : Invoker {
 
-  abstract suspend fun run(params: Params): Either<Error, Type>
+  override fun <Params, Type : Any> execute(
+      useCase: UseCase<Params, Type>,
+      params: Params,
+      onResult: (Either<Error, Type>) -> Unit) {
 
-  fun execute(params: Params, onResult: (Either<Error, Type>) -> Unit) {
-    val job = async(CommonPool) { run(params) }
+    val job = async(CommonPool) { useCase.run(params) }
     launch(UI) { onResult.invoke(job.await()) }
   }
 }

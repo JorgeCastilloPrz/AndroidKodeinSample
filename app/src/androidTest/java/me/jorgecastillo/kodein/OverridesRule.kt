@@ -9,14 +9,14 @@ import org.kodein.di.Kodein
  */
 class OverridesRule(private val bindings: Kodein.MainBuilder.() -> Unit = {}) : ExternalResource() {
 
-  private fun testApp(): TestApp =
-      InstrumentationRegistry.getTargetContext().applicationContext as TestApp
+  private fun app(): PhotosApp =
+      InstrumentationRegistry.getTargetContext().applicationContext as PhotosApp
 
   override fun before() {
-    testApp().overrideDependencies(bindings)
+    app().overrideBindings = bindings
   }
 
   override fun after() {
-    testApp().clearOverrides()
+    app().overrideBindings = {}
   }
 }

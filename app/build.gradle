@@ -11,7 +11,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "me.jorgecastillo.kodein.TestApplicationRunner"
+        testInstrumentationRunner "com.github.tmurakami.dexopener.DexOpenerAndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -65,6 +65,7 @@ dependencies {
     androidTestImplementation "com.android.support.test:rules:$astl_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espresso_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_version"
     androidTestImplementation "com.android.support.test:runner:$astl_version"
     androidTestImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"

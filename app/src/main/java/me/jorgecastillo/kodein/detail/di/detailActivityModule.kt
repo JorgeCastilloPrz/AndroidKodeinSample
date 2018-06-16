@@ -12,5 +12,5 @@ import org.kodein.di.generic.provider
  */
 fun detailActivityModule(photoId: String) = Kodein.Module {
   bind<GetPhoto>() with provider { GetPhoto(instance()) }
-  bind<DetailPresenter>() with provider { DetailPresenter(photoId, instance()) }
+  bind<DetailPresenter>() with provider { DetailPresenter(instance(), photoId, instance()) }
 }
