@@ -21,7 +21,7 @@ Leverages the power of __Kotlin DSL support__ + __high order functions__
 
 * Bindings stored as __deferred functions__
 
-```
+```kotlin
 bind<Logger> with provider { LogcatLogger(ctx) }
 ```
 
