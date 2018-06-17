@@ -1,12 +1,11 @@
 package me.jorgecastillo.kodein.common.log
 
-import android.content.Context
 import android.util.Log
 
 /**
  * Android Logger implementation using Logcat.
  */
-class AndroidLogger(private val context: Context) : Logger {
+class AndroidLogger : Logger {
   override fun log(tag: String, level: Logger.Level, message: String) {
     when (level) {
       Logger.Level.Info -> Log.i(tag, message)

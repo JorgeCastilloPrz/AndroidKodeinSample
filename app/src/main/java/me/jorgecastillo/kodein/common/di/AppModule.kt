@@ -31,7 +31,7 @@ import org.kodein.di.generic.singleton
  */
 fun appModule(appContext: Context) = Kodein.Module {
   bind<Context>() with provider { appContext }
-  bind<Logger>() with singleton { AndroidLogger(instance()) }
+  bind<Logger>() with singleton { AndroidLogger() }
   bind<Invoker>() with singleton { UseCaseInvoker() }
 
   import(httpAppModule())

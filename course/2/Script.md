@@ -11,6 +11,7 @@ type erasure. We'll know more about this later.
 
 Since we're doing Android, on this course will be interested on the jvm and the android ones.
 
+(show http://kodein.org/Kodein-DI/?5.0/core#install)
 To fetch Kodein dependency, add jcenter to your list of repositories for the gradle modules where
 you want to use it.
 
@@ -22,15 +23,17 @@ This version of the core is **immune to type erasure**. That means instances lik
 `List<String>` and `List<Int>`. So this will be very handy if you're using generic types on your
 app.
 
-Being immune to type erasure has a cost. We don't want to get into too deep details, but it relies
+But being immune to type erasure has a cost. We don't want to get into too deep details, but it relies
 on some Kodein machinery to wire up types that is known to be a bit slow. In my opinion you
 shouldn't worry too much about this fact unless your dependency graph is really complex, not like
 the average android apps out there.
 
 If still you find performance problems, it will probably be related to not using Kodein properly,
-and that's the rationale of this course. But still, you must know that there is a Kodein jvm erased
+and that's the rationale of this course. But anyways, you must know that there is also a Kodein jvm erased
 version which is more performant, but does suffer from type erasure. That means you will get into
-trouble and will need some tricky workarounds on your code to make it work.
+trouble and will need some tricky workarounds on your code to make it work from time to time.
+
+So I highly recommend you using the generic one.
 
 Apart from the jvm artifact, since we're doing Android we will need to add the Kodein Android
-artifact, and we'll be good to go.
+artifact, and then we'll be good to go.
