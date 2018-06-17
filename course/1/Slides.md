@@ -1,3 +1,7 @@
+autoscale: true
+footer: [caster.io - Dependency Injection in Android using Kodein](https://www.caster.io)
+slidenumbers: true
+
 # "What's Kodein?"
 
 ---
@@ -40,7 +44,8 @@ bind<Logger> with provider { LogcatLogger(ctx) }
 
 ---
 
-## - Build a __complete application architecture__ step by step.
-## - Learn to __abstract and inject__ out our dependencies using Kodein.
+## "What will I learn?"
+* Build a __complete application architecture__ step by step.
+* Learn to __abstract and inject__ out our dependencies using Kodein.
 
 # Welcome!
