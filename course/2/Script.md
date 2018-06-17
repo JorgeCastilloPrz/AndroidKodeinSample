@@ -22,16 +22,15 @@ This version of the core is **immune to type erasure**. That means instances lik
 `List<String>` and `List<Int>`. So this will be very handy if you're using generic types on your
 app.
 
-But being immune to type erasure has a cost. We don't want to get in too deep details, but it relies
+Being immune to type erasure has a cost. We don't want to get into too deep details, but it relies
 on some Kodein machinery to wire up types that is known to be a bit slow. In my opinion you
 shouldn't worry too much about this fact unless your dependency graph is really complex, not like
-the average android apps out there. I'm talking about other usages of Kotlin like very complex
-computation related backends and things like that.
+the average android apps out there.
 
-If at some point you find any performance problems, it will probably be related to not using Kodein
-properly, since there are many ways to improve it. But still, you must know that theres a Kodein jvm
-erased version which is more performant, but does suffer from type erasure. That means you will
-most likely get into some complications and tricky workarounds to make it work.
+If still you find performance problems, it will probably be related to not using Kodein properly,
+and that's the rationale of this course. But still, you must know that there is a Kodein jvm erased
+version which is more performant, but does suffer from type erasure. That means you will get into
+trouble and will need some tricky workarounds on your code to make it work.
 
 Apart from the jvm artifact, since we're doing Android we will need to add the Kodein Android
-artifact.
+artifact, and we'll be good to go.

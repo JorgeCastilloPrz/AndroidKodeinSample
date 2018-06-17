@@ -6,17 +6,17 @@ slidenumbers: true
 
 ---
 
-Artifacts per platform / framework:
+Artifacts:
 
-* `kodein-di-generic-jvm`: JVM default artifact, __immune to type erasure__
-* `kodein-di-erased-jvm`: Same but __suffers from type erasure__
-* `kodein-di-erased-native`: Support for other native platforms like iOS
+* `kodein-di-generic-jvm`: __no type erasure__
+* `kodein-di-erased-jvm`: __suffers type erasure__
+* `kodein-di-erased-native`: iOS...
 * `kodein-di-erased-js`: Javascript support
-* `kodein-di-framework-android`: Android syntax and utilities
-
-Interested on: `kodein-di-generic-jvm` and `kodein-di-framework-android`.
+* `kodein-di-framework-android`: syntax and utilities
 
 ---
 
+Interested on:
 
-
+* `kodein-di-generic-jvm`: __no type erasure__
+* `kodein-di-framework-android`: syntax and utilities
