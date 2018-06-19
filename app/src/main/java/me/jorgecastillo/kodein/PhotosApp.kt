@@ -6,7 +6,7 @@ import me.jorgecastillo.kodein.common.di.appModule
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 
-open class PhotosApp : Application(), KodeinAware {
+class PhotosApp : Application(), KodeinAware {
 
   @VisibleForTesting
   var overrideBindings: Kodein.MainBuilder.() -> Unit = {}
