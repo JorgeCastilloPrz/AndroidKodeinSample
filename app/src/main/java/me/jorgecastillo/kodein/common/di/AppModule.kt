@@ -7,7 +7,6 @@ import me.jorgecastillo.kodein.common.data.network.UnsplashService
 import me.jorgecastillo.kodein.common.data.network.http.HeadersInterceptor
 import me.jorgecastillo.kodein.common.data.network.http.httpClient
 import me.jorgecastillo.kodein.common.data.network.http.loggingInterceptor
-import me.jorgecastillo.kodein.common.data.network.photosService
 import me.jorgecastillo.kodein.common.domain.interactor.Invoker
 import me.jorgecastillo.kodein.common.domain.interactor.UseCaseInvoker
 import me.jorgecastillo.kodein.common.domain.repository.PhotosLocalDataSource
@@ -22,6 +21,8 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
  * Application scoped dependencies. Dependencies that we would need to reuse at any point in the
@@ -47,7 +48,15 @@ fun httpAppModule() = Kodein.Module {
 }
 
 fun photosAppModule() = Kodein.Module {
-  bind<UnsplashService>() with singleton { photosService(instance()) }
+  bind<UnsplashService>() with singleton {
+    Retrofit.Builder()
+      .baseUrl("https://api.unsplash.com")
+      .client(instance())
+      .addConverterFactory(MoshiConverterFactory.create())
+      .build()
+      .create(UnsplashService::class.java)
+  }
+
   bind<PhotosLocalDataSource>() with singleton { InMemoryPhotosDataSource() }
   bind<PhotosNetworkDataSource>() with singleton { UnsplashPhotosDataSource(instance()) }
   bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }

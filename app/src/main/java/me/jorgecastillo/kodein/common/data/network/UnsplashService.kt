@@ -10,12 +10,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-fun photosService(client: OkHttpClient): UnsplashService =
-    Retrofit.Builder().baseUrl("https://api.unsplash.com")
-        .client(client)
-        .addConverterFactory(MoshiConverterFactory.create()).build()
-        .create(UnsplashService::class.java)
-
 interface UnsplashService {
 
   companion object {
