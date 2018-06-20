@@ -21,8 +21,10 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import org.kodein.di.generic.with
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Application scoped dependencies. Dependencies that we would need to reuse at any point in the
@@ -57,7 +59,9 @@ fun photosAppModule() = Kodein.Module {
       .create(UnsplashService::class.java)
   }
 
-  bind<PhotosLocalDataSource>() with singleton { InMemoryPhotosDataSource() }
+  constant(tag = "ttl") with TimeUnit.HOURS.toMillis(1)
+
+  bind<PhotosLocalDataSource>() with singleton { InMemoryPhotosDataSource(instance(tag = "ttl")) }
   bind<PhotosNetworkDataSource>() with singleton { UnsplashPhotosDataSource(instance()) }
   bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }
 }
