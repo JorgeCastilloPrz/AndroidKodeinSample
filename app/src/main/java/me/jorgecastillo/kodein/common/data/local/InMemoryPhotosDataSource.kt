@@ -7,35 +7,30 @@ import me.jorgecastillo.kodein.common.data.network.PhotosNotFound
 import me.jorgecastillo.kodein.common.domain.error.Error
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.domain.repository.PhotosLocalDataSource
-import me.jorgecastillo.kodein.detail.domain.interactor.PhotoNotFound
 
 /**
- * This is an in-memory implementation of the photos data source, mostly for simplicity of the
- * example. It could potentially be a persistence implementation. It gets a TTL injected so photos stored for a time
- * longer than the TTL are automatically removed and the get operation returns an error.
+ * This is an in-memory implementation of the photos data source, mostly for simplicity of the example. It could
+ * potentially be a persistence implementation. It gets a TTL constant injected that determines the Time to Live for
+ * photos, so photos stored for a longer than the TTL become automatically invalid and removed.
+ *
+ * For sake of simplicity the list of photos becomes invalid when any photo inside of it is invalid.
  */
 class InMemoryPhotosDataSource(private val ttlMillis: Long) : PhotosLocalDataSource {
 
   private var photos: List<PersistedPhoto> = emptyList()
 
-  override fun getAll(): Either<Error, List<Photo>> =
-    if (photos.isEmpty() || photos.any { it.isInvalid(ttlMillis) }) {
-      photos = emptyList()
-      PhotosNotFound().left()
-    } else {
-      photos.map { it.photo }
-        .right()
-    }
+  override fun getAll(): Either<Error, List<Photo>> = when {
+    photos.isEmpty() -> PhotosNotFound().left()
+    photos.any { it.isInvalid(ttlMillis) } -> PhotosNotFound().left().also { photos = emptyList(); }
+    else -> photos.map { it.photo }.right()
+  }
 
   override fun getPhoto(photoId: String): Either<Error, Photo> {
-    val photo = photos.find { it.photo.id == photoId }
+    val persistedPhoto = photos.find { it.photo.id == photoId }
     return when {
-      photo == null -> PhotoNotFound().left()
-      photo.isInvalid(ttlMillis) -> {
-        photos -= photo
-        PhotoNotFound().left()
-      }
-      else -> photo.photo.right()
+      persistedPhoto == null -> PhotosNotFound().left()
+      persistedPhoto.isInvalid(ttlMillis) -> PhotosNotFound().left().also { photos -= persistedPhoto }
+      else -> persistedPhoto.photo.right()
     }
   }
 
@@ -44,7 +39,7 @@ class InMemoryPhotosDataSource(private val ttlMillis: Long) : PhotosLocalDataSou
 
     val photosNotPersistedYet = persistedPhotosToSave - this.photos
     val photosAlreadyPersisted = (persistedPhotosToSave intersect this.photos).map {
-      it.copy(whenSaved = System.currentTimeMillis())
+      it.copy(storedTimeMillis = System.currentTimeMillis())
     }
 
     this.photos = photosNotPersistedYet + photosAlreadyPersisted
@@ -61,17 +56,17 @@ class InMemoryPhotosDataSource(private val ttlMillis: Long) : PhotosLocalDataSou
 }
 
 data class PersistedPhoto(
-  val whenSaved: Long,
+  val storedTimeMillis: Long,
   val photo: Photo
 ) {
   override fun equals(other: Any?): Boolean =
     other is PersistedPhoto && photo == other.photo
 
   override fun hashCode(): Int {
-    var result = whenSaved.hashCode()
+    var result = storedTimeMillis.hashCode()
     result = 31 * result + photo.hashCode()
     return result
   }
 }
 
-fun PersistedPhoto.isInvalid(ttlMillis: Long) = System.currentTimeMillis() - whenSaved >= ttlMillis
+fun PersistedPhoto.isInvalid(ttlMillis: Long) = System.currentTimeMillis() - storedTimeMillis >= ttlMillis
