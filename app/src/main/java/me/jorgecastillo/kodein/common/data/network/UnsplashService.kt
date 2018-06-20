@@ -2,10 +2,7 @@ package me.jorgecastillo.kodein.common.data.network
 
 import me.jorgecastillo.kodein.common.data.network.model.GetPhotosResponse
 import me.jorgecastillo.kodein.common.data.network.model.PhotoDto
-import okhttp3.OkHttpClient
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

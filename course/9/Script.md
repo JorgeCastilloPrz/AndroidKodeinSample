@@ -1,61 +1,50 @@
 # 9: "Injecting Singletons"
 
-We have a use case to retrieve the photos, but it's just returning a list of stubbed photos. Lest say we want to
-retrieve them from a network API, like the Unsplash one.
+We have a use case to retrieve the photos, but it's just returning a list of stubbed photos. Let's say we want to
+fetch them from a network API, like the Unsplash one.
 
-Use cases are also a way to decouple our Presenters or ViewModels from the sources of data. So the use case will depend
-on something else with that responsibility.
+Use cases are a way to decouple Presenters or ViewModels from the sources of data. So the use case will depend on
+a different entity with that given responsibility. A "data source".
 
-We will use a "data source" for that. A data source is precisely a source of data. I will add an interface declaring the
-contract, and then implement it using retrofit and targeting the Unsplash API.
-
+I will add an interface declaring the contract, and then implement it using retrofit and targeting the Unsplash API.
 Data sources are usually hidden behind interfaces, since they depend directly on frameworks like android for
-persistence, or the network layer ones that make real requests. We don't want to perform real http queries on our tests or
-to store things on the real data base.
+persistence, or an HTTP client to make real requests. We don't want to perform real http queries or to store things on
+the real data base when we're running our tests. We need our tests to be isolated from frameworks.
 
-Can you imagine how our boss would react if he finds out that we've cleared the real production database just because
-we were running a test? That's obviously not an ideal situation, so you will want to replace those real data sources by
-mocks.
+Regardless how we're implementing the data source, it will require a Retrofit service targeting the Unsplash API passed
+in to make the HTTP requests. So it will be another nested dependency on the tree.
 
-You should always depend on abstractions to keep frameworks out of the equation when the time for tests come.
+Once we got all the pieces in place, we need to provide them on the corresponding Kodein scope. Since we will need to
+show the pictures on the photo list activity, let's add the bindings there.
 
-Our UnsplashPhotoDataSource implementation will also require a Retrofit service, which is this UnsplashService. Don't
-worry about the implementation, it's just a simple retrofit client.
+As you can see, our use case now requires to pass the data source in. We can call instance() for it, and then write the
+corresponding binding.
 
-Once we got all the pieces passed in by constructors, we need to provide them on the current scope. So lets go back to the
-specific photo list activity module.
+But let's think for a second, should we write the binding on the activity scope? We're binding a data source.
+Data sources are usually accessed from different screens, since they can fulfill different requests. For example: If we
+add a detail screen tomorrow, we will need to fetch details for a single photo, and that's gonna be another query on the
+same data source. For that reason, data sources are usually provided in the application scope, so they can live during
+the whole app execution.
 
-As you can see, our use case is now requiring to pass a new dependency in, which is gonna be the data source.
-So we can add the instance() placeholder for it, and then write the corresponding binding.
+So let's add the binding to the app module. This binding will be visible from the activity scope, since we're making it
+depend on the application one.
 
-But wait a second, should we write it here? We're creating a source of data. Data sources are usually accessed from
-different screens. For example: If we add a detail screen tomorrow, we will need to fetch details for a single photo
-from there, and that's gonna be part of the same data source. That's why data sources are usually provided in the
-application scope, so they can live during the whole app execution.
-
-That means we can just go to the app module, and provide our data source there. No worries, nested bindings will take
-care as we're making our activity module to depend on the application one.
-
-This could be the binding to provide it. Here, we are linking the interface to the concrete type, so anytime the
-interface is requested for injection, we will provide the concrete implementation targeting the Unsplash API.
+Here, we are linking the interface to the concrete type, so anytime the interface is requested for injection, we provide
+the concrete implementation targeting the Unsplash API.
 
 But there's still something else. Whenever you're declaring a binding you can use a provider like this one, which will
 provide a new instance each time it's requested. But a data source sometimes requires to have the same instance all the
-time. Maybe it's not such needed for this one, since it's querying the backend and we are not storing any state that we
-need to keep, but what if it was an in memory one? We would need it to be a single instance, or in other words,
-a Singleton.
+time. In other words, you need it to be a Singleton.
 
-If you need a binding to always provide the same instance for all the cases, you can just use singleton on it, instead
-of provider. So any time it's injected, the same instance will be returned.
+If you need a binding to always provide the same instance for all the cases, you can just use singleton {} for it,
+instead of a plain provider. So any time it's injected, the same instance will be returned.
 
-Singleton work per scope. That means they provide the same instance for the given Kodein container where they
-are defined. So, if you added this binding into the base activity module, it would provide the same instance every time
-for the same activity type. But will also provide a different instance for other activities.
+Singletons work per scope. That means they provide the same instance for the given Kodein container where they are
+declared. If you added this binding into the base activity module, it would provide the same instance every time
+for the same activity type. But if the activity type varies, it will return a different singleton instance for that one.
 
-Given that we're declaring it on the app module, we're safe. We will get the same instance for the whole app execution.
+Note that the data source also requires a retrofit service that we can fulfill in the same way. We'll need a binding for
+it that we can also provide as a singleton. And for the retrofit service, we can also bind the OkHttpClient instance
+used to build it.
 
-Besides that, note that the Unsplash service also requires a parameter that we can fulfill in the same way. It's the
-retrofit service. We'll need a binding for it that we can also provide as a singleton. You'll also find
-that you need another nested one for the OkHttpClient used to build up the retrofit service.
-
-Once you have all the chained bindings in place, you'll be good to go, and start making real requests!
+Once you have all the chained bindings in place, you'll be good to go, and start making real requests on your photos activity.
