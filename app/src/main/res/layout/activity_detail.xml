@@ -137,17 +137,11 @@
                         android:textSize="@dimen/subtitle"
                         tools:text="23 april 2017" />
 
-                    <TextView
-                        android:id="@+id/description"
+                    <FrameLayout
+                        android:id="@+id/fragmentContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing"
-                        android:layout_marginRight="@dimen/spacing"
-                        android:layout_marginTop="@dimen/spacing"
-                        android:fontFamily="sans-serif-regular"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/body"
-                        tools:text="Asokda odasko daoskdas kopdsakopd akopsdk oadopkask doasdkop asdkpoasd" />
+                        />
                 </LinearLayout>
             </FrameLayout>
         </android.support.v4.widget.NestedScrollView>
