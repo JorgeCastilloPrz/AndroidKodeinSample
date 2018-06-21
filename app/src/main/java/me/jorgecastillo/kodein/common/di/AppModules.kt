@@ -13,6 +13,8 @@ import me.jorgecastillo.kodein.common.domain.repository.PhotosLocalDataSource
 import me.jorgecastillo.kodein.common.domain.repository.PhotosNetworkDataSource
 import me.jorgecastillo.kodein.common.log.AndroidLogger
 import me.jorgecastillo.kodein.common.log.Logger
+import me.jorgecastillo.kodein.common.router.Navigator
+import me.jorgecastillo.kodein.common.router.PhotoAppNavigator
 import me.jorgecastillo.kodein.photoslist.domain.repository.PhotosRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -34,6 +36,7 @@ import java.util.concurrent.TimeUnit
  */
 fun appModule(appContext: Context) = Kodein.Module {
   bind<Context>() with provider { appContext }
+  bind<Navigator>() with provider { PhotoAppNavigator(instance()) }
   bind<Logger>() with singleton { AndroidLogger() }
   bind<Invoker>() with singleton { UseCaseInvoker() }
 

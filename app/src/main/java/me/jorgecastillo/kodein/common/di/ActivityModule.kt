@@ -1,6 +1,6 @@
 package me.jorgecastillo.kodein.common.di
 
-import android.app.Activity
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import me.jorgecastillo.kodein.common.router.Navigator
 import me.jorgecastillo.kodein.common.router.PhotoAppNavigator
@@ -16,6 +16,5 @@ import org.kodein.di.generic.provider
  * context.
  */
 fun baseActivityModule(activity: AppCompatActivity) = Kodein.Module {
-  bind<Activity>() with provider { activity }
-  bind<Navigator>() with provider { PhotoAppNavigator(instance()) }
+  bind<Context>(overrides = true) with provider { activity }
 }
