@@ -145,9 +145,8 @@
                         android:layout_marginRight="@dimen/spacing"
                         android:layout_marginTop="@dimen/spacing"
                         android:fontFamily="sans-serif-regular"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/body"
-                        android:visibility="gone"
                         tools:text="Asokda odasko daoskdas kopdsakopd akopsdk oadopkask doasdkop asdkpoasd" />
                 </LinearLayout>
             </FrameLayout>

@@ -6,4 +6,5 @@
     <string name="author">Pic by:</string>
     <string name="on">on</string>
     <string name="unsplash"><u>Unsplash</u></string>
+    <string name="no_description">The author has not provided any description for this photo.</string>
 </resources>

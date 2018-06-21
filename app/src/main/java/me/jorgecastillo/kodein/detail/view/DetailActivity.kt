@@ -96,6 +96,7 @@ class DetailActivity : InjectedActivity(), DetailPresenter.View {
 
     val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(photo.created_at)
     publishedAt.text = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(date)
+    description.text = if (!photo.description.isNullOrBlank()) photo.description else getString(R.string.no_description)
   }
 
   override fun displayLoadingPhotoError() {
