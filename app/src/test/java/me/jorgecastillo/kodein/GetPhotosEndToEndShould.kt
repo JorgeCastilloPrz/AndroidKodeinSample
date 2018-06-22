@@ -1,15 +1,19 @@
 package me.jorgecastillo.kodein
 
+import android.content.Context
 import arrow.core.left
 import arrow.core.right
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import me.jorgecastillo.kodein.common.data.network.PhotosNotFound
+import me.jorgecastillo.kodein.common.di.appModule
+import me.jorgecastillo.kodein.common.di.baseActivityModule
 import me.jorgecastillo.kodein.common.domain.interactor.Invoker
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.domain.repository.PhotosLocalDataSource
 import me.jorgecastillo.kodein.common.domain.repository.PhotosNetworkDataSource
 import me.jorgecastillo.kodein.common.router.Navigator
+import me.jorgecastillo.kodein.photoslist.di.photoListActivityModule
 import me.jorgecastillo.kodein.photoslist.domain.interactor.GetPhotos
 import me.jorgecastillo.kodein.photoslist.domain.repository.PhotosRepository
 import me.jorgecastillo.kodein.photoslist.presenter.PhotoListPresenter
@@ -35,6 +39,9 @@ class GetPhotosEndToEndShould : KodeinAware {
   val presenter: PhotoListPresenter by instance()
 
   @Mock
+  lateinit var context: Context
+
+  @Mock
   lateinit var localDataSource: PhotosLocalDataSource
   @Mock
   lateinit var networkDataSource: PhotosNetworkDataSource
@@ -44,13 +51,15 @@ class GetPhotosEndToEndShould : KodeinAware {
   lateinit var view: PhotoListPresenter.View
 
   override val kodein = Kodein.lazy {
-    bind<Navigator>() with singleton { navigator }
-    bind<Invoker>() with singleton { BlockingUseCaseInvoker() }
-    bind<PhotosLocalDataSource>() with singleton { localDataSource }
-    bind<PhotosNetworkDataSource>() with singleton { networkDataSource }
-    bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }
-    bind<GetPhotos>() with provider { GetPhotos(instance()) }
-    bind<PhotoListPresenter>() with provider { PhotoListPresenter(instance(), instance(), instance()) }
+    // production modules
+    import(appModule(context))
+    import(photoListActivityModule())
+
+    // overrides
+    bind<Invoker>(overrides = true) with singleton { BlockingUseCaseInvoker() }
+    bind<Navigator>(overrides = true) with singleton { navigator }
+    bind<PhotosLocalDataSource>(overrides = true) with singleton { localDataSource }
+    bind<PhotosNetworkDataSource>(overrides = true) with singleton { networkDataSource }
   }
 
   @Test
