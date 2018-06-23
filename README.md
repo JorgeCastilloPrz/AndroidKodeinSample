@@ -8,23 +8,35 @@ The repo is a sample project for the [caster.io Kodein course](https://caster.io
 
 ## Lessons
 * **What's Kodein?**: What is Kodein and how is it different from other frameworks like Dagger
-* **First steps**: Fetch Kodein dependency on Build gradle. (Explain difference between kodein-generic-jvm or kodein-erased-jvm)
-* **Add basic DI support**: Adding Basic Dependency Injection to the application scope, showcasing how to write the bindings with Kodein.
-* **Your first injection**: Inject a simple Logger on the application class using the app scope to show how it works (run the app). (Perform the nested context injection "by constructor")
-* **Lazy injections**: Example of "Lazy" injections. Replace logger with a lazy binding explaining what's the benefit of doing it.
-* **Making your classes KodeinAware**: Upgrade Application class to use KodeinAware to make your class Kodein aware and simplify syntax on injecting deps.
-* **Scoped Injection**: Add a InjectedActivity as a base for injecting activity context and extend the activity module from the application one. Explain how this opens a new "injection scope" apart from the application one. Explain the concept of "DI scopes". Also explain retainedKodein() for activities as a Kodein immune to activity restarts (lifecycle).
-* **Activity Scope**: Inject dependencies on the Activity Scope: Add a presenter for the photos list activity and inject it using the activity scope.
-* **Transitive Dependencies**: Add use case to retrieve the photos and inject it. Explain how transitive dependencies work on Kodein when doing this.
-* **Injecting Singletons**: Add photo network datasource to fetch the photos and inject it. Inject it using by singleton {} on the application Scope. Good moment to explain singleton providers.
-* **Tagged injections**: Add repository and inject the network datasource and also an in-memory one on it. Use it as an example on how to use tagged injections (qualifiers for implementing the same contract with 2 different implementations)
-* **Constant Injection": Add a timestamp to saved records and a TTL so they are discarded whenever they are too old. Provide the TTL number using constant injection feature by Kodein.
-* **Adding a Detail Activity**: Once we have the architecture complete and injected by 2 scopes, let's add a detail activity, following the same pattern in terms of DI.
-* **Inject Navigation**: Inject navigator on activities relaying on activity context injected into scope.
-* **Injecting Fragments**: Add a fragment and inject it using Kodein enclosing activity scope (closestKodein()).
-* **Injecting Custom Views**: Add a customview and inject it using the closer  scope (activity or fragment).
-* **Injecting Mocks on your tests**: Write end to end test removing view implementation and service as an example on how to use DI to replace dependencies by mocks on your architecture.
-* **Injecting Mocks on your UI tests**: Write UI test using Kodein to Inject mock usecases that help us to return the data we want and assert over final view states.
+* **First steps**: Fetch Kodein dependency on Build gradle. (Explain difference between artifacts kodein-generic-jvm or kodein-erased-jvm)
+* **Application Scope**: Start by creating an Application Kodein container to provide application scoped dependencies.
+* **Your first injection**: Use the application scope to inject your first dependency (A simple Logger)
+* **Lazy injections**: Explain the concept of laziness in DI frameworks and Kodein
+* **Scoped Injection - Activity Scope**: Explain the concept of scoped injection by providing a second scope: The
+Activity one.
+* **Activity scoped dependencies**: Use the activity scope to inject a Presenter, which will just need to live under
+that scope.
+* **Transitive dependencies**: Inject a use case on presenter to showcase how Kodein solves the problem of nested
+transitive dependencies.
+* **Injecting Singletons**: Explain why singletons are often needed by providing a singleton instance for a photo data
+source.
+* **Tagged Injections**: Explain why two bindings for the same type collide and how to resolve the problem with tagged
+bindings. Use it to provide two different OkHttp Interceptors.
+* **Constant Injection**: Showcase how Kodein allows to define bindings for constants and not just entities. Use the
+concept to provide a TTL for the local photos cache.
+* **Adding a Detail Activity**: This lesson is a good chance to recap the process we followed for the photos list
+activity Kodein scope, but over a new detail activity.
+* **Injecting Navigation**: Inject a Navigator in Presenter and showcase how we can provide a different Context instance
+per scope, showcasing the benefit of Kodein binding overrides.
+* **Injecting Fragments**: We're adding a fragment to the detail activity and showcasing how to create a new scope:
+Fragment Scope.
+* **Injecting Custom Views**: Let's add a custom view and explain how Kodein allows Custom Views to auto inject, the
+same way activities or fragments do.
+* **Testing your architecture (mock injection)**: This lesson offers and end to end black box unit testing scenario
+where thanks to DI we replace the pieces that depend on frameworks by mocks. DI helps us to replace those at any
+arbitrary depth on the dependency tree.
+* **Injecting Mocks on your UI tests**: Learn how to write UI tests reusing production Kodein modules for fulfilling
+dependencies but replacing just the required parts in the graph thanks to Kodein module overrides.
 
 ## Screenshots
 
