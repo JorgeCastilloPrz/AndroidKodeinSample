@@ -15,7 +15,7 @@ abstract class InjectedActivity : AppCompatActivity(), KodeinAware {
 
   override val kodein: Kodein by retainedKodein {
     extend(appKodein)
-    import(baseActivityModule(this@InjectedActivity), true)
+    import(baseActivityModule(this@InjectedActivity), allowOverride = true)
     import(activityModule())
     (app().overrideBindings)()
   }
