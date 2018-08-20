@@ -6,6 +6,11 @@ provide testability.
 
 The repo is a sample project for the [caster.io Kodein course](https://caster.io) about the same subject.
 
+## Testing
+
+* Don't forget to **disable animations** on your emulator for running UI tests, or you could get some race conditions.
+* UI tests have been developed using a Nexus 5X API 27 (just in case you wanna replicate the same scenario, to avoid any noise).
+
 ## Lessons
 * **What's Kodein?**: What is Kodein and how is it different from other frameworks like Dagger
 * **First steps**: Fetch Kodein dependency on Build gradle. (Explain difference between artifacts kodein-generic-jvm or kodein-erased-jvm)
