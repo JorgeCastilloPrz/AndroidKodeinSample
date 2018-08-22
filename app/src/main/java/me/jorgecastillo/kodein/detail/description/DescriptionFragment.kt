@@ -15,7 +15,7 @@ import org.kodein.di.generic.instance
 
 class DescriptionFragment : Fragment(), KodeinAware, DescriptionPresenter.View {
 
-  private val activityKodein by closestKodein()
+  private val activityKodein by closestKodein(context!!)
   private val presenter by instance<DescriptionPresenter>()
 
   override val kodein = Kodein.lazy {

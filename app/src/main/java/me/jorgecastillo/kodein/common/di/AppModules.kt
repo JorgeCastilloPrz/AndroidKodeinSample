@@ -19,11 +19,7 @@ import me.jorgecastillo.kodein.photoslist.domain.repository.PhotosRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
-import org.kodein.di.generic.with
+import org.kodein.di.generic.*
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -34,37 +30,37 @@ import java.util.concurrent.TimeUnit
  *
  * It brings into scope bindings defined in other app scoped modules for better modularity.
  */
-fun appModule(appContext: Context) = Kodein.Module {
-  bind<Context>() with provider { appContext }
-  bind<Navigator>() with provider { PhotoAppNavigator(instance()) }
-  bind<Logger>() with singleton { AndroidLogger() }
-  bind<Invoker>() with singleton { UseCaseInvoker() }
+fun appModule(appContext: Context) = Kodein.Module("appModule") {
+    bind<Context>() with provider { appContext }
+    bind<Navigator>() with provider { PhotoAppNavigator(instance()) }
+    bind<Logger>() with singleton { AndroidLogger() }
+    bind<Invoker>() with singleton { UseCaseInvoker() }
 
-  import(httpAppModule())
-  import(photosAppModule())
+    import(httpAppModule())
+    import(photosAppModule())
 }
 
-fun httpAppModule() = Kodein.Module {
-  bind<Interceptor>(tag = "headers") with singleton { HeadersInterceptor() }
-  bind<Interceptor>(tag = "logging") with singleton { loggingInterceptor() }
-  bind<OkHttpClient>() with singleton {
-    httpClient(instance(tag = "headers"), instance(tag = "logging"))
-  }
+fun httpAppModule() = Kodein.Module("httpAppModule") {
+    bind<Interceptor>(tag = "headers") with singleton { HeadersInterceptor() }
+    bind<Interceptor>(tag = "logging") with singleton { loggingInterceptor() }
+    bind<OkHttpClient>() with singleton {
+        httpClient(instance(tag = "headers"), instance(tag = "logging"))
+    }
 }
 
-fun photosAppModule() = Kodein.Module {
-  bind<UnsplashService>() with singleton {
-    Retrofit.Builder()
-      .baseUrl("https://api.unsplash.com")
-      .client(instance())
-      .addConverterFactory(MoshiConverterFactory.create())
-      .build()
-      .create(UnsplashService::class.java)
-  }
+fun photosAppModule() = Kodein.Module("photosAppModule") {
+    bind<UnsplashService>() with singleton {
+        Retrofit.Builder()
+                .baseUrl("https://api.unsplash.com")
+                .client(instance())
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+                .create(UnsplashService::class.java)
+    }
 
-  constant(tag = "ttl") with TimeUnit.HOURS.toMillis(1)
+    constant(tag = "ttl") with TimeUnit.HOURS.toMillis(1)
 
-  bind<PhotosLocalDataSource>() with singleton { InMemoryPhotosDataSource(instance(tag = "ttl")) }
-  bind<PhotosNetworkDataSource>() with singleton { UnsplashPhotosDataSource(instance()) }
-  bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }
+    bind<PhotosLocalDataSource>() with singleton { InMemoryPhotosDataSource(instance(tag = "ttl")) }
+    bind<PhotosNetworkDataSource>() with singleton { UnsplashPhotosDataSource(instance()) }
+    bind<PhotosRepository>() with singleton { PhotosRepository(instance(), instance()) }
 }

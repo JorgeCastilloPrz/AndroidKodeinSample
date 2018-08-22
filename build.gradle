@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlin_version = '1.2.50'
-        kodein_version = '5.0.0'
+        kotlin_version = '1.2.60'
+        kodein_version = '5.2.0'
         android_arch_components_version = '1.1.1'
         arrow_version = '0.7.2'
         coroutines_version = '0.22.5'
@@ -21,7 +21,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -31,6 +31,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/kodein-framework/Kodein-DI" }
     }
 }
 
