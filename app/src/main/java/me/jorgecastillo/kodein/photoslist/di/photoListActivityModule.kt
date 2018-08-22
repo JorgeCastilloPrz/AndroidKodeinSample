@@ -10,7 +10,7 @@ import org.kodein.di.generic.provider
 /**
  * Specific android scoped module for the photos list activity.
  */
-fun photoListActivityModule() = Kodein.Module {
+fun photoListActivityModule() = Kodein.Module("PhotoListActivityModuleDI") {
   bind<GetPhotos>() with provider { GetPhotos(instance()) }
   bind<PhotoListPresenter>() with provider { PhotoListPresenter(instance(), instance(), instance()) }
 }

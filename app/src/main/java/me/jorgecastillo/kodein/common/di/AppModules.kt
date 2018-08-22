@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit
  *
  * It brings into scope bindings defined in other app scoped modules for better modularity.
  */
-fun appModule(appContext: Context) = Kodein.Module {
+fun appModule(appContext: Context) = Kodein.Module("appModule") {
   bind<Context>() with provider { appContext }
   bind<Navigator>() with provider { PhotoAppNavigator(instance()) }
   bind<Logger>() with singleton { AndroidLogger() }
@@ -44,7 +44,7 @@ fun appModule(appContext: Context) = Kodein.Module {
   import(photosAppModule())
 }
 
-fun httpAppModule() = Kodein.Module {
+fun httpAppModule() = Kodein.Module("httpModule") {
   bind<Interceptor>(tag = "headers") with singleton { HeadersInterceptor() }
   bind<Interceptor>(tag = "logging") with singleton { loggingInterceptor() }
   bind<OkHttpClient>() with singleton {
@@ -52,7 +52,7 @@ fun httpAppModule() = Kodein.Module {
   }
 }
 
-fun photosAppModule() = Kodein.Module {
+fun photosAppModule() = Kodein.Module("photoAppModule") {
   bind<UnsplashService>() with singleton {
     Retrofit.Builder()
       .baseUrl("https://api.unsplash.com")

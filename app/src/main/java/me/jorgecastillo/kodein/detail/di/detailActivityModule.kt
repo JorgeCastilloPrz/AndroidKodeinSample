@@ -10,7 +10,7 @@ import org.kodein.di.generic.provider
 /**
  * Specific android scoped module for the detail activity.
  */
-fun detailActivityModule(photoId: String) = Kodein.Module {
+fun detailActivityModule(photoId: String) = Kodein.Module("detailActivityModuleDI") {
   bind<GetPhoto>() with provider { GetPhoto(instance()) }
   bind<DetailPresenter>() with provider { DetailPresenter(instance(), photoId, instance()) }
 }

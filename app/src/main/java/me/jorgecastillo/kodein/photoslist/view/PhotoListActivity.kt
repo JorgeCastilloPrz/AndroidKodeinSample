@@ -20,7 +20,7 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
   private val presenter by instance<PhotoListPresenter>()
   private val adapter = PhotosAdapter()
 
-  override fun activityModule() = Kodein.Module {
+  override fun activityModule() = Kodein.Module("photoListActivityModule") {
     import(photoListActivityModule())
   }
 
