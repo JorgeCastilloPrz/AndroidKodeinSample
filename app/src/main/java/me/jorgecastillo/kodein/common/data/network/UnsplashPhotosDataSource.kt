@@ -15,26 +15,32 @@ class PhotosNotFound : Error.FeatureError()
 class UnsplashPhotosDataSource(private val service: UnsplashService) : PhotosNetworkDataSource {
 
   override fun getAll(): Either<Error, List<Photo>> =
-      Try {
-        service.getPhotos().execute()
-      }.fold(ifFailure = {
-        Error.ServerError().left()
-      }, ifSuccess = { response ->
-        if (response.isSuccessful) {
-          val body = response.body()!!
-          body.toDomain().right()
-        } else PhotosNotFound().left()
-      })
+    Try {
+      service.getPhotos()
+          .execute()
+    }.fold(ifFailure = {
+      Error.ServerError()
+          .left()
+    }, ifSuccess = { response ->
+      if (response.isSuccessful) {
+        val body = response.body()!!
+        body.toDomain()
+            .right()
+      } else PhotosNotFound().left()
+    })
 
   override fun getPhoto(photoId: String): Either<Error, Photo> =
-      Try {
-        service.getPhoto(photoId).execute()
-      }.fold(ifFailure = {
-        Error.ServerError().left()
-      }, ifSuccess = { response ->
-        if (response.isSuccessful) {
-          val body = response.body()!!
-          body.toDomain().right()
-        } else PhotoNotFound().left()
-      })
+    Try {
+      service.getPhoto(photoId)
+          .execute()
+    }.fold(ifFailure = {
+      Error.ServerError()
+          .left()
+    }, ifSuccess = { response ->
+      if (response.isSuccessful) {
+        val body = response.body()!!
+        body.toDomain()
+            .right()
+      } else PhotoNotFound().left()
+    })
 }

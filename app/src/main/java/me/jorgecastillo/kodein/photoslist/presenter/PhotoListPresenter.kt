@@ -3,15 +3,16 @@ package me.jorgecastillo.kodein.photoslist.presenter
 import arrow.core.Either
 import me.jorgecastillo.kodein.common.domain.error.Error
 import me.jorgecastillo.kodein.common.domain.interactor.Invoker
+import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.presenter.BasePresenter
 import me.jorgecastillo.kodein.common.router.Navigator
 import me.jorgecastillo.kodein.photoslist.domain.interactor.GetPhotos
-import me.jorgecastillo.kodein.common.domain.model.Photo
 
 class PhotoListPresenter(
-    private val invoker: Invoker,
-    private val getPhotos: GetPhotos,
-    private val navigator: Navigator) : BasePresenter<PhotoListPresenter.View>() {
+  private val invoker: Invoker,
+  private val getPhotos: GetPhotos,
+  private val navigator: Navigator
+) : BasePresenter<PhotoListPresenter.View>() {
 
   interface View : BasePresenter.View {
     fun renderPhotos(photos: List<Photo>)

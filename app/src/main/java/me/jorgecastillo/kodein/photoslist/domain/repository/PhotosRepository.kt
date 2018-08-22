@@ -5,7 +5,10 @@ import arrow.core.right
 import me.jorgecastillo.kodein.common.domain.error.Error
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.common.domain.repository.CachePolicy
-import me.jorgecastillo.kodein.common.domain.repository.CachePolicy.*
+import me.jorgecastillo.kodein.common.domain.repository.CachePolicy.LocalFirst
+import me.jorgecastillo.kodein.common.domain.repository.CachePolicy.LocalOnly
+import me.jorgecastillo.kodein.common.domain.repository.CachePolicy.NetworkFirst
+import me.jorgecastillo.kodein.common.domain.repository.CachePolicy.NetworkOnly
 import me.jorgecastillo.kodein.common.domain.repository.PhotosLocalDataSource
 import me.jorgecastillo.kodein.common.domain.repository.PhotosNetworkDataSource
 
@@ -14,8 +17,9 @@ import me.jorgecastillo.kodein.common.domain.repository.PhotosNetworkDataSource
  * from different sources.
  */
 class PhotosRepository(
-    private val localDataSource: PhotosLocalDataSource,
-    private val networkDataSource: PhotosNetworkDataSource) {
+  private val localDataSource: PhotosLocalDataSource,
+  private val networkDataSource: PhotosNetworkDataSource
+) {
 
   fun getAll(policy: CachePolicy = CachePolicy.LocalFirst): Either<Error, List<Photo>> {
     return when (policy) {
@@ -24,7 +28,10 @@ class PhotosRepository(
           { localDataSource.save(it); it.right() })
 
       LocalFirst -> localDataSource.getAll().fold(
-          { networkDataSource.getAll().map { localDataSource.save(it); it } },
+          {
+            networkDataSource.getAll()
+                .map { localDataSource.save(it); it }
+          },
           { it.right() })
 
       LocalOnly -> localDataSource.getAll()
@@ -33,14 +40,20 @@ class PhotosRepository(
     }
   }
 
-  fun getPhoto(photoId: String, policy: CachePolicy = CachePolicy.LocalFirst): Either<Error, Photo> {
+  fun getPhoto(
+    photoId: String,
+    policy: CachePolicy = CachePolicy.LocalFirst
+  ): Either<Error, Photo> {
     return when (policy) {
       NetworkFirst -> networkDataSource.getPhoto(photoId).fold(
           { localDataSource.getPhoto(photoId) },
           { localDataSource.save(it); it.right() })
 
       LocalFirst -> localDataSource.getPhoto(photoId).fold(
-          { networkDataSource.getPhoto(photoId).map { localDataSource.save(it); it } },
+          {
+            networkDataSource.getPhoto(photoId)
+                .map { localDataSource.save(it); it }
+          },
           { it.right() })
 
       LocalOnly -> localDataSource.getPhoto(photoId)

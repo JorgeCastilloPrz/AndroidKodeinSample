@@ -8,9 +8,10 @@ import me.jorgecastillo.kodein.common.presenter.BasePresenter
 import me.jorgecastillo.kodein.detail.domain.interactor.GetPhoto
 
 class DetailPresenter(
-    private val invoker: Invoker,
-    private val photoId: String,
-    private val getPhoto: GetPhoto) : BasePresenter<DetailPresenter.View>() {
+  private val invoker: Invoker,
+  private val photoId: String,
+  private val getPhoto: GetPhoto
+) : BasePresenter<DetailPresenter.View>() {
 
   interface View : BasePresenter.View {
     fun renderPhoto(photo: Photo): Unit

@@ -4,7 +4,10 @@ import android.app.Activity
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.espresso.matcher.ViewMatchers.hasDescendant
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import arrow.core.left
 import arrow.core.right
 import com.nhaarman.mockito_kotlin.whenever
@@ -39,7 +42,7 @@ class PhotoListActivityShould {
   @Rule
   @JvmField
   var activityRule: IntentsTestRule<PhotoListActivity> =
-      IntentsTestRule(PhotoListActivity::class.java, true, false)
+    IntentsTestRule(PhotoListActivity::class.java, true, false)
 
   @Rule
   @JvmField
@@ -81,11 +84,13 @@ class PhotoListActivityShould {
   companion object {
     val anyGetPhotosParams = GetPhotos.Params(1, "landscape")
     val anyPhotos: List<Photo> = (1..3).map {
-      Photo(it.toString(),
+      Photo(
+          it.toString(),
           "http:url/$it",
           "AuthorName$it",
           "Description$it",
-          "2018-06-16T08:52:46-0500")
+          "2018-06-16T08:52:46-0500"
+      )
     }
   }
 }

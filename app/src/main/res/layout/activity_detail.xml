@@ -3,156 +3,173 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <android.support.design.widget.CoordinatorLayout
+  <android.support.design.widget.CoordinatorLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@android:color/background_light"
+      android:fitsSystemWindows="true"
+      >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/background_light"
-        android:fitsSystemWindows="true">
+        android:layout_height="360dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="360dp"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+      <android.support.design.widget.CollapsingToolbarLayout
+          android:id="@+id/main.collapsing"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:fitsSystemWindows="true"
+          app:contentScrim="?attr/colorPrimary"
+          app:expandedTitleMarginEnd="64dp"
+          app:expandedTitleMarginStart="48dp"
+          app:layout_scrollFlags="scroll|exitUntilCollapsed"
+          app:titleEnabled="false"
+          >
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/main.collapsing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:titleEnabled="false">
-
-                <ImageView
-                    android:id="@+id/picture"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/divider"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
-                    app:elevation="@dimen/toolbar_elevation"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView
+        <ImageView
+            android:id="@+id/picture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:background="@color/divider"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            app:layout_collapseMode="parallax"
+            />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:elevation="@dimen/toolbar_elevation"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            />
+      </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-                <ProgressBar
-                    android:id="@+id/loading"
-                    style="@style/Base.Widget.AppCompat.ProgressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/spacing" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
-                <LinearLayout
-                    android:id="@+id/content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/spacing"
-                    android:paddingTop="@dimen/spacing"
-                    android:visibility="invisible">
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/authorLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing"
-                            android:layout_marginTop="@dimen/spacing"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/author"
-                            android:textColor="@color/text"
-                            android:textSize="@dimen/title" />
-
-                        <TextView
-                            android:id="@+id/titleView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_medium"
-                            android:layout_marginTop="@dimen/spacing"
-                            android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/title"
-                            tools:text="\@jorgecastillo" />
-
-                        <TextView
-                            android:id="@+id/onText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_medium"
-                            android:layout_marginTop="@dimen/spacing"
-                            android:fontFamily="sans-serif-light"
-                            android:text="@string/on"
-                            android:textColor="@color/text"
-                            android:textSize="@dimen/title" />
-
-                        <TextView
-                            android:id="@+id/unsplashLink"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_medium"
-                            android:layout_marginTop="@dimen/spacing"
-                            android:fontFamily="sans-serif-light"
-                            android:text="@string/unsplash"
-                            android:textColor="@color/text"
-                            android:textSize="@dimen/title" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/publishedAt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing"
-                        android:layout_marginRight="@dimen/spacing"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:fontFamily="sans-serif-light"
-                        android:textColor="@color/text_light"
-                        android:textSize="@dimen/subtitle"
-                        tools:text="23 april 2017" />
-
-                    <FrameLayout
-                        android:id="@+id/fragmentContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-                </LinearLayout>
-            </FrameLayout>
-        </android.support.v4.widget.NestedScrollView>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+        <ProgressBar
+            android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing"
-            android:src="@drawable/ic_share_white_24dp"
-            app:layout_anchor="@id/appbarLayout"
-            app:layout_anchorGravity="bottom|right|end" />
-    </android.support.design.widget.CoordinatorLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing"
+            style="@style/Base.Widget.AppCompat.ProgressBar"
+            />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing"
+            android:paddingTop="@dimen/spacing"
+            android:visibility="invisible"
+            >
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              >
+
+            <TextView
+                android:id="@+id/authorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing"
+                android:layout_marginTop="@dimen/spacing"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/author"
+                android:textColor="@color/text"
+                android:textSize="@dimen/title"
+                />
+
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/title"
+                tools:text="\@jorgecastillo"
+                />
+
+            <TextView
+                android:id="@+id/onText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/on"
+                android:textColor="@color/text"
+                android:textSize="@dimen/title"
+                />
+
+            <TextView
+                android:id="@+id/unsplashLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/unsplash"
+                android:textColor="@color/text"
+                android:textSize="@dimen/title"
+                />
+          </LinearLayout>
+
+          <TextView
+              android:id="@+id/publishedAt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/spacing"
+              android:layout_marginRight="@dimen/spacing"
+              android:layout_marginTop="@dimen/spacing_small"
+              android:fontFamily="sans-serif-light"
+              android:textColor="@color/text_light"
+              android:textSize="@dimen/subtitle"
+              tools:text="23 april 2017"
+              />
+
+          <FrameLayout
+              android:id="@+id/fragmentContainer"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              />
+        </LinearLayout>
+      </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:src="@drawable/ic_share_white_24dp"
+        app:layout_anchor="@id/appbarLayout"
+        app:layout_anchorGravity="bottom|right|end"
+        />
+  </android.support.design.widget.CoordinatorLayout>
 </FrameLayout>

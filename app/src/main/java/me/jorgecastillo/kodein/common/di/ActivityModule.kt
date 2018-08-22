@@ -2,11 +2,8 @@ package me.jorgecastillo.kodein.common.di
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
-import me.jorgecastillo.kodein.common.router.Navigator
-import me.jorgecastillo.kodein.common.router.PhotoAppNavigator
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 /**
