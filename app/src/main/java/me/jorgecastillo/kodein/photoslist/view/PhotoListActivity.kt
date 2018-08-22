@@ -6,12 +6,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import kotlinx.android.synthetic.main.activity_photo_list.*
+import kotlinx.android.synthetic.main.activity_photo_list.loading
+import kotlinx.android.synthetic.main.activity_photo_list.photoList
+import kotlinx.android.synthetic.main.activity_photo_list.toolbar
+import me.jorgecastillo.kodein.R
 import me.jorgecastillo.kodein.common.di.InjectedActivity
 import me.jorgecastillo.kodein.common.domain.model.Photo
 import me.jorgecastillo.kodein.photoslist.di.photoListActivityModule
 import me.jorgecastillo.kodein.photoslist.presenter.PhotoListPresenter
-import me.jorgecastillo.kodein.R
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
@@ -20,7 +22,7 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
   private val presenter by instance<PhotoListPresenter>()
   private val adapter = PhotosAdapter()
 
-  override fun activityModule() = Kodein.Module {
+  override fun activityModule() = Kodein.Module("photoListActivityModule") {
     import(photoListActivityModule())
   }
 
@@ -76,6 +78,7 @@ class PhotoListActivity : InjectedActivity(), PhotoListPresenter.View {
   }
 
   override fun displayLoadingPhotosError() {
-    Snackbar.make(toolbar, R.string.loading_photos_error, Snackbar.LENGTH_SHORT).show()
+    Snackbar.make(toolbar, R.string.loading_photos_error, Snackbar.LENGTH_SHORT)
+        .show()
   }
 }

@@ -9,5 +9,8 @@ class GetPhotos(private val photosRepository: PhotosRepository) :
 
   override fun run(params: Params) = photosRepository.getAll()
 
-  data class Params(val page: Int, val query: String)
+  data class Params(
+    val page: Int,
+    val query: String
+  )
 }

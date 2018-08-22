@@ -5,7 +5,11 @@ package me.jorgecastillo.kodein.common.log
  * technologies.
  */
 interface Logger {
-  fun log(tag: String, level: Level = Level.Verbose, message: String)
+  fun log(
+    tag: String,
+    level: Level = Level.Verbose,
+    message: String
+  )
 
   sealed class Level {
     object Info : Level()

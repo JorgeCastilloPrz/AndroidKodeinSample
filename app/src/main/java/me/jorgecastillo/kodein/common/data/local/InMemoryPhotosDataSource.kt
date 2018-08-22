@@ -29,7 +29,9 @@ class InMemoryPhotosDataSource(private val ttlMillis: Long) : PhotosLocalDataSou
     val persistedPhoto = photos.find { it.photo.id == photoId }
     return when {
       persistedPhoto == null -> PhotosNotFound().left()
-      persistedPhoto.isInvalid(ttlMillis) -> PhotosNotFound().left().also { photos -= persistedPhoto }
+      persistedPhoto.isInvalid(
+          ttlMillis
+      ) -> PhotosNotFound().left().also { photos -= persistedPhoto }
       else -> persistedPhoto.photo.right()
     }
   }
@@ -69,4 +71,5 @@ data class PersistedPhoto(
   }
 }
 
-fun PersistedPhoto.isInvalid(ttlMillis: Long) = System.currentTimeMillis() - storedTimeMillis >= ttlMillis
+fun PersistedPhoto.isInvalid(ttlMillis: Long) =
+  System.currentTimeMillis() - storedTimeMillis >= ttlMillis

@@ -11,99 +11,100 @@
     app:cardBackgroundColor="@color/white"
     >
 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:paddingBottom="@dimen/spacing"
+      >
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@color/divider"
+        android:scaleType="centerCrop"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/spacing"
+        android:orientation="horizontal"
         >
 
-        <ImageView
-            android:id="@+id/picture"
-            android:layout_width="match_parent"
-            android:layout_height="360dp"
-            android:background="@color/divider"
-            android:scaleType="centerCrop"
-            />
+      <TextView
+          android:id="@+id/authorLabel"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/spacing"
+          android:layout_marginTop="@dimen/spacing"
+          android:fontFamily="sans-serif-medium"
+          android:text="@string/author"
+          android:textColor="@color/text"
+          android:textSize="@dimen/title"
+          />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+      <TextView
+          android:id="@+id/title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/spacing_medium"
+          android:layout_marginTop="@dimen/spacing"
+          android:fontFamily="sans-serif-medium"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="@dimen/title"
+          tools:text="\@jorgecastillo"
+          />
 
-            <TextView
-                android:id="@+id/authorLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing"
-                android:layout_marginTop="@dimen/spacing"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/text"
-                android:textSize="@dimen/title"
-                android:text="@string/author"
-                />
+      <TextView
+          android:id="@+id/onText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/spacing_medium"
+          android:layout_marginTop="@dimen/spacing"
+          android:fontFamily="sans-serif-light"
+          android:text="@string/on"
+          android:textColor="@color/text"
+          android:textSize="@dimen/title"
+          />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/title"
-                tools:text="\@jorgecastillo"
-                />
-
-            <TextView
-                android:id="@+id/onText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing"
-                android:fontFamily="sans-serif-light"
-                android:textColor="@color/text"
-                android:textSize="@dimen/title"
-                android:text="@string/on"
-                />
-
-            <TextView
-                android:id="@+id/unsplashLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing"
-                android:fontFamily="sans-serif-light"
-                android:textColor="@color/text"
-                android:textSize="@dimen/title"
-                android:text="@string/unsplash"
-                />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/publishedAt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_marginRight="@dimen/spacing"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/text_light"
-            android:textSize="@dimen/subtitle"
-            tools:text="23 april 2017"
-            />
-
-        <TextView
-            android:id="@+id/hashtags"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_marginRight="@dimen/spacing"
-            android:layout_marginTop="@dimen/spacing"
-            android:fontFamily="sans-serif-regular"
-            android:textColor="@color/text"
-            android:textSize="@dimen/body"
-            tools:text="Asokda odasko daoskdas kopdsakopd akopsdk oadopkask doasdkop asdkpoasd"
-            />
+      <TextView
+          android:id="@+id/unsplashLink"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/spacing_medium"
+          android:layout_marginTop="@dimen/spacing"
+          android:fontFamily="sans-serif-light"
+          android:text="@string/unsplash"
+          android:textColor="@color/text"
+          android:textSize="@dimen/title"
+          />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/publishedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing"
+        android:layout_marginRight="@dimen/spacing"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/subtitle"
+        tools:text="23 april 2017"
+        />
+
+    <TextView
+        android:id="@+id/hashtags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing"
+        android:layout_marginRight="@dimen/spacing"
+        android:layout_marginTop="@dimen/spacing"
+        android:fontFamily="sans-serif-regular"
+        android:textColor="@color/text"
+        android:textSize="@dimen/body"
+        tools:text="Asokda odasko daoskdas kopdsakopd akopsdk oadopkask doasdkop asdkpoasd"
+        />
+  </LinearLayout>
 </android.support.v7.widget.CardView>

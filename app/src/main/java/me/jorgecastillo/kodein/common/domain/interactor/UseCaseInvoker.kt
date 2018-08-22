@@ -10,9 +10,10 @@ import me.jorgecastillo.kodein.common.domain.error.Error
 class UseCaseInvoker : Invoker {
 
   override fun <Params, Type : Any> execute(
-      useCase: UseCase<Params, Type>,
-      params: Params,
-      onResult: (Either<Error, Type>) -> Unit) {
+    useCase: UseCase<Params, Type>,
+    params: Params,
+    onResult: (Either<Error, Type>) -> Unit
+  ) {
 
     val job = async(CommonPool) { useCase.run(params) }
     launch(UI) { onResult.invoke(job.await()) }

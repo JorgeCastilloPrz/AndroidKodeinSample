@@ -11,7 +11,10 @@ class PhotosApp : Application(), KodeinAware {
   @VisibleForTesting
   var overrideBindings: Kodein.MainBuilder.() -> Unit = {}
 
-  override var kodein = Kodein.lazy {
-    import(appModule(applicationContext))
-  }
+  override val kodein: Kodein
+    get() = Kodein.invoke {
+      lazy {
+        import(appModule(applicationContext))
+      }
+    }
 }

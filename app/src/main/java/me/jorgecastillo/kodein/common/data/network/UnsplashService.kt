@@ -14,16 +14,20 @@ interface UnsplashService {
   }
 
   @GET("/photos")
-  fun getPhotos(@Query("page") page: Int = 1,
-                @Query("per_page") perPage: Int = ITEMS_PER_PAGE,
-                @Query("orientation") orientation: String = "squarish")
+  fun getPhotos(
+    @Query("page") page: Int = 1,
+    @Query("per_page") perPage: Int = ITEMS_PER_PAGE,
+    @Query("orientation") orientation: String = "squarish"
+  )
       : Call<List<PhotoDto>>
 
   @GET("/search/photos")
-  fun getPhotos(@Query("query") query: String,
-                @Query("page") page: Int = 1,
-                @Query("per_page") perPage: Int = ITEMS_PER_PAGE,
-                @Query("orientation") orientation: String = "squarish")
+  fun getPhotos(
+    @Query("query") query: String,
+    @Query("page") page: Int = 1,
+    @Query("per_page") perPage: Int = ITEMS_PER_PAGE,
+    @Query("orientation") orientation: String = "squarish"
+  )
       : Call<GetPhotosResponse>
 
   @GET("/photos/{id}")

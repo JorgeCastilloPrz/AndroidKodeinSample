@@ -91,14 +91,15 @@ class DetailActivity : InjectedActivity(), DetailPresenter.View {
 
   override fun renderPhoto(photo: Photo) {
     Picasso.get()
-      .load(photo.url)
-      .into(picture)
+        .load(photo.url)
+        .into(picture)
 
     content.visibility = View.VISIBLE
     titleView.text = photo.author
     unsplashLink.text = getString(R.string.unsplash)
 
-    val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(photo.created_at)
+    val date =
+      SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(photo.created_at)
     publishedAt.text = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(date)
 
     loadDescriptionFragment(photo.description)
@@ -113,7 +114,7 @@ class DetailActivity : InjectedActivity(), DetailPresenter.View {
 
   override fun displayLoadingPhotoError() {
     Snackbar.make(toolbar, R.string.loading_photo_error, Snackbar.LENGTH_SHORT)
-      .show()
+        .show()
   }
 
   companion object {

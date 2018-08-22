@@ -15,7 +15,7 @@ import org.kodein.di.generic.instance
 
 class DescriptionFragment : Fragment(), KodeinAware, DescriptionPresenter.View {
 
-  private val activityKodein by closestKodein()
+  private val activityKodein by closestKodein(context!!)
   private val presenter by instance<DescriptionPresenter>()
 
   override val kodein = Kodein.lazy {
@@ -39,7 +39,7 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionPresenter.View {
     super.onPause()
     presenter.pause()
   }
-  
+
   override fun renderDescription(descriptionText: String) {
     description.text = arguments?.getString(EXTRA_TEXT)
   }
@@ -52,6 +52,8 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionPresenter.View {
     private const val EXTRA_TEXT = "EXTRA_DESCRIPTION_TEXT"
 
     fun newInstance(description: String): DescriptionFragment =
-      DescriptionFragment().apply { arguments = Bundle().apply { putString(EXTRA_TEXT, description) } }
+      DescriptionFragment().apply {
+        arguments = Bundle().apply { putString(EXTRA_TEXT, description) }
+      }
   }
 }

@@ -6,7 +6,11 @@ import android.util.Log
  * Android Logger implementation using Logcat.
  */
 class AndroidLogger : Logger {
-  override fun log(tag: String, level: Logger.Level, message: String) {
+  override fun log(
+    tag: String,
+    level: Logger.Level,
+    message: String
+  ) {
     when (level) {
       Logger.Level.Info -> Log.i(tag, message)
       Logger.Level.Debug -> Log.d(tag, message)

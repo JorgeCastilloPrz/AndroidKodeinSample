@@ -12,5 +12,9 @@ import org.kodein.di.generic.provider
  */
 fun photoListActivityModule() = Kodein.Module {
   bind<GetPhotos>() with provider { GetPhotos(instance()) }
-  bind<PhotoListPresenter>() with provider { PhotoListPresenter(instance(), instance(), instance()) }
+  bind<PhotoListPresenter>() with provider {
+    PhotoListPresenter(
+        instance(), instance(), instance()
+    )
+  }
 }

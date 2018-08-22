@@ -11,4 +11,5 @@ fun PhotoDto.toDomain(): Photo = Photo(
     this.urls.regular,
     this.author,
     this.description,
-    this.created_at)
+    this.created_at
+)

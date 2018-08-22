@@ -13,9 +13,10 @@ import me.jorgecastillo.kodein.common.domain.interactor.UseCase
 class BlockingUseCaseInvoker : Invoker {
 
   override fun <Params, Type : Any> execute(
-      useCase: UseCase<Params, Type>,
-      params: Params,
-      onResult: (Either<Error, Type>) -> Unit) {
+    useCase: UseCase<Params, Type>,
+    params: Params,
+    onResult: (Either<Error, Type>) -> Unit
+  ) {
 
     onResult.invoke(runBlocking { useCase.run(params) })
   }
