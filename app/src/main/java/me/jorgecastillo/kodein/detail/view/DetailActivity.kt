@@ -35,7 +35,7 @@ class DetailActivity : InjectedActivity(), DetailPresenter.View {
     intent?.extras?.getString(EXTRA_ID) ?: NO_ID
   }
 
-  override fun activityModule() = Kodein.Module {
+  override fun activityModule() = Kodein.Module("detailActivityModule") {
     import(detailActivityModule(photoId))
   }
 

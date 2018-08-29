@@ -15,6 +15,6 @@ import org.kodein.di.generic.provider
  * are prone to be here. Interactors for example, or the Router since it requires an activity
  * context.
  */
-fun baseActivityModule(activity: AppCompatActivity) = Kodein.Module {
+fun baseActivityModule(activity: AppCompatActivity) = Kodein.Module("activityModule") {
   bind<Context>(overrides = true) with provider { activity }
 }

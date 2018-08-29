@@ -13,17 +13,20 @@ abstract class InjectedActivity : AppCompatActivity(), KodeinAware {
   // closestKodein() automatically fetches app Kodein scope.
   private val appKodein by closestKodein()
 
-  override val kodein: Kodein by retainedKodein {
-    extend(appKodein)
-    import(baseActivityModule(this@InjectedActivity), allowOverride = true)
-    import(activityModule())
-    (app().overrideBindings)()
-  }
+  override val kodein: Kodein
+    get() = Kodein.invoke {
+      retainedKodein {
+        extend(appKodein)
+        import(baseActivityModule(this@InjectedActivity), allowOverride = true)
+        import(activityModule())
+        (app().overrideBindings)()
+      }
+    }
 
   /**
    * Optional to override, if your activity needs specific DI.
    */
-  open fun activityModule() = Kodein.Module {
+  open fun activityModule() = Kodein.Module("activityModule") {
   }
 }
 
