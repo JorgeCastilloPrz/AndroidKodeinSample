@@ -5,7 +5,7 @@ buildscript {
         target_sdk_version = 28
 
         kotlin_version = '1.3.10'
-        kodein_version = '5.2.0'
+        kodein_version = '6.0.0'
         android_arch_components_version = '1.1.1'
         arrow_version = '0.7.2'
         coroutines_version = '0.22.5'
@@ -25,7 +25,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
