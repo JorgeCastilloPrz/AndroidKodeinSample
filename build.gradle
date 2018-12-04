@@ -1,5 +1,9 @@
 buildscript {
     ext {
+        compile_sdk_version = 28
+        min_sdk_version = 21
+        target_sdk_version = 28
+
         kotlin_version = '1.3.10'
         kodein_version = '5.2.0'
         android_arch_components_version = '1.1.1'
