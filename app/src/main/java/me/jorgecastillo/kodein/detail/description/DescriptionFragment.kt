@@ -15,16 +15,13 @@ import org.kodein.di.generic.instance
 
 class DescriptionFragment : Fragment(), KodeinAware, DescriptionPresenter.View {
 
-  private val activityKodein by closestKodein(context!!)
   private val presenter by instance<DescriptionPresenter>()
 
-  override val kodein: Kodein
-    get() = Kodein.invoke {
-      lazy {
-        extend(activityKodein)
-        import(descriptionFragmentModule(arguments?.getString(EXTRA_TEXT) ?: ""))
-      }
-    }
+  override val kodein: Kodein = Kodein.lazy {
+    val activityKodein by closestKodein(context!!)
+    extend(activityKodein)
+    import(descriptionFragmentModule(arguments?.getString(EXTRA_TEXT) ?: ""))
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
